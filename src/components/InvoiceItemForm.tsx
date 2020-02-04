@@ -8,11 +8,11 @@ export const InvoiceItemForm = () => {
     <Form>
       <Form.Group controlId="product_id">
         <Form.Label>Discount (%)</Form.Label>
-        <Form.Control as="select" name="product_id" />
+        <Form.Control as="select" name="product_id"/>
       </Form.Group>
       <Form.Group controlId="quantity">
         <Form.Label>Customer</Form.Label>
-        <Form.Control name="quantity" />
+        <Form.Control name="quantity"/>
       </Form.Group>
       <Form.Label>Add product</Form.Label>
       <Button variant="outline-secondary" type="submit">Add</Button>
@@ -27,5 +27,5 @@ export const InvoiceItemForm = () => {
       </Table>
       <h2>Total:</h2>
     </Form>
-  )
+  );
 };

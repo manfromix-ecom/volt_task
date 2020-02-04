@@ -11,18 +11,19 @@ interface invoiceItemsProps {
 
 const invoiceItems: Array<invoiceItemsProps> = [];
 const invoiceItemsRows: Array<JSX.Element | null> = invoiceItems.map(i => {
-  const {name, price, quantity} = i;
+  const { name, price, quantity } = i;
   return (
-  <tr>
-    <td>{name}</td>
-    <td>{price}</td>
-    <td>
-      <Form>
-        <Form.Control name="quantity" defaultValue={quantity} />
-      </Form>
-    </td>
-  </tr>
-)});
+    <tr>
+      <td>{name}</td>
+      <td>{price}</td>
+      <td>
+        <Form>
+          <Form.Control name="quantity" defaultValue={quantity}/>
+        </Form>
+      </td>
+    </tr>
+  );
+});
 
 export const InvoiceItems: React.FC = (props: any) => {
   return (
@@ -40,5 +41,5 @@ export const InvoiceItems: React.FC = (props: any) => {
         </tbody>
       </Table>
     </>
-  )
+  );
 };

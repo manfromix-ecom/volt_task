@@ -4,8 +4,8 @@ const apiClient = axios.create({
   baseURL: 'https://yoursite.com/api',
   responseType: 'json',
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 });
 
 export const customersAPI = {

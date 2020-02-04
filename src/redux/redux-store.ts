@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { invoicesReducer } from './invoices-reducer';
 import { customersReducer } from './customers-reducer';
@@ -9,10 +9,10 @@ let reducers = combineReducers({
   customer: customersReducer,
   product: productsReducer,
   invoice: invoicesReducer,
-  invoiceItem: invoiceItemsReducer
+  invoiceItem: invoiceItemsReducer,
 });
 
 const myWindow = window as any;
 const composeEnhancers = myWindow.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export const store = createStore(reducers,  composeEnhancers(applyMiddleware(thunkMiddleware)));
+export const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 myWindow.__store__ = store;

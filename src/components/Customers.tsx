@@ -12,19 +12,20 @@ interface customerProps {
 
 const customers: Array<customerProps> = [];
 const CustomerRows: Array<JSX.Element | null> = customers.map(i => {
-  const {id, address, phone} = i;
+  const { id, address, phone } = i;
   return (
-  <tr>
-    <td>{id}</td>
-    <td>{address}</td>
-    <td>{phone}</td>
-  </tr>
-)});
+    <tr>
+      <td>{id}</td>
+      <td>{address}</td>
+      <td>{phone}</td>
+    </tr>
+  );
+});
 
 export const Customers: React.FC = () => {
   return (
     <>
-      <h1>Customer List <ButtonModal title="Add Customer" body={<CustomerForm />}/></h1>
+      <h1>Customer List <ButtonModal title="Add Customer" body={<CustomerForm/>}/></h1>
       <Table hover responsive>
         <thead>
         <tr>
@@ -39,5 +40,5 @@ export const Customers: React.FC = () => {
         </tbody>
       </Table>
     </>
-  )
+  );
 };

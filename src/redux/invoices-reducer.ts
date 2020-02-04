@@ -1,14 +1,10 @@
-import * as actions from './invoice-actions';
+import * as actions from './invoices-actions';
+import { state } from './state';
 
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>;
 
-const initialState = {
-  id: null,
-  customer_id: null,
-  discount: null,
-  total: null,
-};
+const initialState = state;
 
 export const invoicesReducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {

@@ -11,19 +11,20 @@ interface productProps {
 
 const products: Array<productProps> = [];
 const ProductRows: Array<JSX.Element | null> = products.map(i => {
-  const {id, name, price} = i;
+  const { id, name, price } = i;
   return (
-  <tr>
-    <td>{id}</td>
-    <td>{name}</td>
-    <td>{price}</td>
-  </tr>
-)});
+    <tr>
+      <td>{id}</td>
+      <td>{name}</td>
+      <td>{price}</td>
+    </tr>
+  );
+});
 
 export const Products: React.FC = () => {
   return (
     <>
-      <h1>Product List <ButtonModal title="Add Product" body={<ProductForm />}/></h1>
+      <h1>Product List <ButtonModal title="Add Product" body={<ProductForm/>}/></h1>
       <Table hover responsive>
         <thead>
         <tr>
@@ -33,9 +34,9 @@ export const Products: React.FC = () => {
         </tr>
         </thead>
         <tbody>
-          {ProductRows}
+        {ProductRows}
         </tbody>
       </Table>
     </>
-  )
+  );
 };
