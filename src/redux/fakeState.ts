@@ -1,4 +1,4 @@
-export let state = {
+export let fakeState = {
   customers: [
     { id: 1, name: 'Mark Benson', address: '353 Rochester St, Rialto FL 43250', phone: '555-534-2342' },
     { id: 2, name: 'Bob Smith', address: '215 Market St, Dansville CA 94325', phone: '555-534-2342' },
@@ -11,6 +11,10 @@ export let state = {
     { id: 4, name: 'Egg Timer', price: 15.99 },
     { id: 5, name: 'Neon Green Hat', price: 21.99 },
   ],
-  invoice_items: [],
-  invoices: [],
+  invoice_items: [
+    { id: 1, customer_id: 1, discount: 0.99, total: 59.98 },
+  ],
+  invoices: [
+    { id: 1, invoice_id: 1, product_id: 1, quantity: 2 },
+  ],
 };

@@ -2,20 +2,22 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { ButtonModal } from './ButtonModal';
 import { CustomerForm } from './CustomerForm';
+import { fakeState } from '../redux/fakeState';
 
 interface customerProps {
-  id: number;
-  name: string;
-  address: number;
-  phone: number;
+  id?: number;
+  name?: string;
+  address?: string;
+  phone?: string;
 }
 
-const customers: Array<customerProps> = [];
+const customers: Array<customerProps> = fakeState.customers;
 const CustomerRows: Array<JSX.Element | null> = customers.map(i => {
-  const { id, address, phone } = i;
+  const { id, name, address, phone } = i;
   return (
     <tr>
       <td>{id}</td>
+      <td>{name}</td>
       <td>{address}</td>
       <td>{phone}</td>
     </tr>

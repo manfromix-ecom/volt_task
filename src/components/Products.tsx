@@ -2,14 +2,15 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { ButtonModal } from './ButtonModal';
 import { ProductForm } from './ProductForm';
+import { fakeState } from '../redux/fakeState';
 
 interface productProps {
-  id: number;
-  name: string;
-  price: number;
+  id?: number;
+  name?: string;
+  price?: number;
 }
 
-const products: Array<productProps> = [];
+const products: Array<productProps> = fakeState.products;
 const ProductRows: Array<JSX.Element | null> = products.map(i => {
   const { id, name, price } = i;
   return (

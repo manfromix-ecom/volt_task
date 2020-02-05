@@ -3,15 +3,16 @@ import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
 import { ButtonModal } from './ButtonModal';
 import { InvoiceForm } from './InvoiceForm';
+import { fakeState } from '../redux/fakeState';
 
 interface invoiceProps {
-  id: number;
-  customer_id: string;
-  discount: number;
-  total: number;
+  id?: number;
+  customer_id?: number;
+  discount?: number;
+  total?: number;
 }
 
-const invoices: Array<invoiceProps> = [];
+const invoices: Array<invoiceProps> = fakeState.invoices;
 const InvoiceRows: Array<JSX.Element | null> = invoices.map(i => {
   const { id, customer_id, discount, total } = i;
   return (

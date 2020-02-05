@@ -1,15 +1,16 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
+import { fakeState } from '../redux/fakeState';
 
 interface invoiceItemsProps {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
+  id?: number;
+  name?: string;
+  price?: number;
+  quantity?: number;
 }
 
-const invoiceItems: Array<invoiceItemsProps> = [];
+const invoiceItems: Array<invoiceItemsProps> = fakeState.invoice_items;
 const invoiceItemsRows: Array<JSX.Element | null> = invoiceItems.map(i => {
   const { name, price, quantity } = i;
   return (
@@ -25,7 +26,7 @@ const invoiceItemsRows: Array<JSX.Element | null> = invoiceItems.map(i => {
   );
 });
 
-export const InvoiceItems: React.FC = (props: any) => {
+export const InvoiceItems: React.FC = () => {
   return (
     <>
       <Table hover responsive>
