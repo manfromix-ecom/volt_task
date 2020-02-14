@@ -2,36 +2,34 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { InvoiceItems } from './InvoiceItems';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { FieldInput } from '../FormsControls/FieldInput';
 
-interface invoiceProps {
-  customerId?: number;
-  discount?: number;
-  total?: number;
-  isModal?: boolean;
-}
+interface Props extends InjectedFormProps {}
 
-export const InvoiceForm: React.FC<invoiceProps> = (props: invoiceProps) => {
-  const { customerId, discount, total = 0, isModal = true } = props;
+export const PureForm = (props: Props) => {
+  const { handleSubmit } = props;
   return (
-    <Form>
-      {!isModal && <h1>Edit Invoice</h1>}
+    <Form onSubmit={handleSubmit}>
       <Form.Group controlId="discount">
-        <Form.Label>Discount (%)</Form.Label>
-        <Form.Control name="discount" defaultValue={discount} />
+        <Form.Label column={false}>Discount (%)</Form.Label>
+        <Field name="discount" type="text" component={FieldInput} />
       </Form.Group>
       <Form.Group controlId="customerId">
-        <Form.Label>Customer</Form.Label>
-        <Form.Control as="select" name="customerId" defaultValue={customerId} />
+        <Form.Label column={false}>Customer</Form.Label>
+        <Field name="customerId" type="select" as="select" component={FieldInput} />
       </Form.Group>
-      <Form.Label>Add product</Form.Label>
+      <Form.Label column={false}>Add product</Form.Label>
       <Button variant="outline-secondary" type="submit">
         Add
       </Button>
       <InvoiceItems />
       <h2>
         Total:
-        {total}
+        <Field name="total" type="span" plaintext={true} component={FieldInput} />
       </h2>
     </Form>
   );
 };
+
+export const InvoiceForm = reduxForm<{}>({ form: 'customer_form' })(PureForm);

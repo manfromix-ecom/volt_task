@@ -14,21 +14,11 @@ interface FormProps {
   };
   type: string;
   placeholder?: string;
-  min?: number;
-  max?: number;
+  as?: any;
+  plaintext?: boolean;
 }
 
-export const FieldInput = ({ input, type, placeholder, min, max }: FormProps) => {
+export const FieldInput = ({ input, type, placeholder, as = 'input', plaintext = false }: FormProps) => {
   const { value, onChange } = input;
-  console.log('FieldInput', input);
-  return (
-    <Form.Control
-      type={type}
-      placeholder={placeholder}
-      defaultValue={value}
-      min={min}
-      max={max}
-      onChange={onChange}
-    />
-  );
+  return <Form.Control type={type} placeholder={placeholder} defaultValue={value} as={as} plaintext={plaintext} onChange={onChange} />;
 };

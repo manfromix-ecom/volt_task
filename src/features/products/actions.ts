@@ -1,24 +1,7 @@
-export const getProducts = () => ({
-  type: 'GET_PRODUCTS',
-  payload: {},
-});
+import { Product } from 'MyModels';
+import { CREATE_PRODUCT_REQUEST, DELETE_PRODUCT_REQUEST, LOAD_PRODUCTS_REQUEST, UPDATE_PRODUCT_REQUEST } from './constants';
 
-export const getProduct = (id: number) => ({
-  type: 'GET_PRODUCT',
-  payload: { id },
-});
-
-export const addProduct = (name: string, price: number | null) => ({
-  type: 'ADD_PRODUCT',
-  payload: { name, price },
-});
-
-export const editProduct = (id: number, name: string | null, price: number | null) => ({
-  type: 'EDIT_PRODUCT',
-  payload: { id, name, price },
-});
-
-export const deleteProduct = (id: number) => ({
-  type: 'DELETE_PRODUCT',
-  payload: { id },
-});
+export const addProductCreator = (product: Product) => ({ type: CREATE_PRODUCT_REQUEST, product });
+export const updateProductCreator = (product: Product) => ({ type: UPDATE_PRODUCT_REQUEST, product });
+export const deleteProductCreator = (product: Product) => ({ type: DELETE_PRODUCT_REQUEST, product });
+export const setProductsCreator = (product: Product) => ({ type: LOAD_PRODUCTS_REQUEST, product });

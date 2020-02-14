@@ -1,6 +1,5 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import Form from 'react-bootstrap/Form';
 import styles from './FormsControl.module.scss';
 
 interface FormProps {
@@ -22,11 +21,11 @@ const FormControl: React.FunctionComponent<FormProps> = ({ meta: { touched, erro
   );
 };
 
-export const BootstrapControl = (props: any) => {
+export const Input = (props: any) => {
   const { input, meta, child, ...restProps } = props;
   return (
     <FormControl {...props}>
-      <Form.Control {...input} {...restProps} />
+      <input {...input} {...restProps} />
     </FormControl>
   );
 };
@@ -40,7 +39,6 @@ export const createField = (
   text = ''
 ) => (
   <div>
-    <Field placeholder={placeholder} name={name} validate={validators} component={component} {...props} />
-    {text}
+    <Field placeholder={placeholder} name={name} validate={validators} component={component} {...props} /> {text}
   </div>
 );

@@ -1,24 +1,7 @@
-export const getInvoices = () => ({
-  type: 'GET_INVOICES',
-  payload: {},
-});
+import { Invoice } from 'MyModels';
+import { CREATE_INVOICE_REQUEST, DELETE_INVOICE_REQUEST, LOAD_INVOICES_REQUEST, UPDATE_INVOICE_REQUEST } from './constants';
 
-export const getInvoice = (id: number) => ({
-  type: 'GET_INVOICE',
-  payload: { id },
-});
-
-export const addInvoice = (customerId: number, discount: number, total: number) => ({
-  type: 'ADD_INVOICE',
-  payload: { customerId, discount, total },
-});
-
-export const editInvoice = (id: number, customerId: number, discount: number, total: number) => ({
-  type: 'EDIT_INVOICE',
-  payload: { id, customerId, discount, total },
-});
-
-export const deleteInvoice = (id: number) => ({
-  type: 'DELETE_INVOICE',
-  payload: { id },
-});
+export const addInvoiceCreator = (invoice: Invoice) => ({ type: CREATE_INVOICE_REQUEST, invoice });
+export const updateInvoiceCreator = (invoice: Invoice) => ({ type: UPDATE_INVOICE_REQUEST, invoice });
+export const deleteInvoiceCreator = (invoice: Invoice) => ({ type: DELETE_INVOICE_REQUEST, invoice });
+export const setInvoicesCreator = (invoice: Invoice) => ({ type: LOAD_INVOICES_REQUEST, invoice });

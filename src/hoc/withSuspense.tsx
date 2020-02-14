@@ -1,10 +1,21 @@
 import React from 'react';
+import Spinner from 'react-bootstrap/Spinner';
+
+export const Loading = () => {
+  return (
+    <div className={'suspense_loading'}>
+      <Spinner animation="border" role="status" variant="secondary">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    </div>
+  );
+};
 
 export const withSuspense = (Component: React.FC) => {
-  return (props: any) => {
+  return () => {
     return (
-      <React.Suspense fallback={<div>loading...</div>}>
-        <Component {...props} />
+      <React.Suspense fallback={Loading}>
+        <Component />
       </React.Suspense>
     );
   };

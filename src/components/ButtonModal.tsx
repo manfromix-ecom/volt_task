@@ -10,23 +10,26 @@ interface modalProps {
 
 export const useModal = (initShow = false) => {
   const [show, setShow] = useState(initShow);
+  const showModal = () => setShow(true);
+  const hideModal = () => setShow(false);
   return {
     show,
-    setShow,
+    showModal,
+    hideModal,
   };
 };
 
 export const ButtonModal: React.FC<modalProps> = (props: modalProps) => {
   const { title, body, buttonText = 'Create' } = props;
-  const { show, setShow } = useModal(false);
+  const { show, showModal, hideModal } = useModal(false);
 
   return (
     <>
-      <Button variant="outline-secondary" onClick={() => setShow(true)}>
+      <Button variant="outline-secondary" onClick={showModal}>
         {buttonText}
       </Button>
 
-      <Modal size="lg" show={show} onHide={() => setShow(false)} aria-labelledby="modal">
+      <Modal size="lg" show={show} onHide={hideModal} aria-labelledby="modal">
         <Modal.Header closeButton>
           <Modal.Title id="modal">{title}</Modal.Title>
         </Modal.Header>

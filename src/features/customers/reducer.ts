@@ -1,7 +1,8 @@
 import { Customer } from 'MyModels';
 import { Dispatch } from 'redux';
-import { CREATE_CUSTOMER_REQUEST, DELETE_CUSTOMER_REQUEST, LOAD_CUSTOMERS_REQUEST, UPDATE_CUSTOMER_REQUEST } from './constants';
+import { CREATE_CUSTOMER_REQUEST, DELETE_CUSTOMER_REQUEST, SET_CUSTOMER_REQUEST, UPDATE_CUSTOMER_REQUEST } from './constants';
 import { customersAPI } from '../../api/customers-api';
+import { addCustomerCreator, deleteCustomerCreator, setCustomersCreator, updateCustomerCreator } from './actions';
 
 export const customersReducer = (state: Customer[] = [], action: { type: any; data: Customer; id: number | undefined }) => {
   switch (action.type) {
@@ -11,7 +12,7 @@ export const customersReducer = (state: Customer[] = [], action: { type: any; da
       return state.filter((customer) => customer.id !== action.id);
     case UPDATE_CUSTOMER_REQUEST:
       return state.map((customer) => (customer.id === action.id ? { ...customer, editing: !customer.editing } : customer));
-    case LOAD_CUSTOMERS_REQUEST:
+    case SET_CUSTOMER_REQUEST:
       return state.map((customer) => {
         if (customer.id === action.id) {
           return {
@@ -29,38 +30,36 @@ export const customersReducer = (state: Customer[] = [], action: { type: any; da
   }
 };
 
-export const addCustomerCreator = (customer: Customer) => ({ type: CREATE_CUSTOMER_REQUEST, customer });
-export const updateCustomerCreator = (customer: Customer) => ({ type: UPDATE_CUSTOMER_REQUEST, customer });
-export const deleteCustomerCreator = (customer: Customer) => ({ type: DELETE_CUSTOMER_REQUEST, customer });
-export const setCustomersCreator = (customer: Customer) => ({ type: LOAD_CUSTOMERS_REQUEST, customer });
-
 export const createCustomerRequest = (customer: Customer) => {
   return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
     await customersAPI.create(customer);
     dispatch(addCustomerCreator(customer));
   };
 };
-export const updateCustomerRequest = (customer: Customer) => {
+export const updateCustomerRequest = (customer: Customer, id: number | undefined) => {
   return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
     await customersAPI.update(customer);
-    dispatch(updateCustomerCreator(customer));
+    dispatch(updateCustomerCreator(customer, id));
   };
 };
-export const deleteCustomerRequest = (customer: Customer) => {
+export const deleteCustomerRequest = (customer: Customer, id: number | undefined) => {
   console.log('deleteCustomerRequest', customer);
-  customersAPI.delete(customer);
+  return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
+    await customersAPI.delete(customer);
+    dispatch(deleteCustomerCreator(customer, id));
+  };
 };
 
-export const createUpdateCustomerRequest = (customer: Customer) => {
+export const createUpdateCustomerRequest = (customer: Customer, id: number | undefined) => {
   console.log('createUpdateCustomerRequest', customer);
   return async (dispatch: (arg0: { type: string; customer: Customer }) => void) => {
-    const toCreate = customer.id && customer.id > 0;
+    const toCreate = id && id > 0;
     await customersAPI.create(customer);
     if (toCreate) {
       createCustomerRequest(customer);
     } else {
-      updateCustomerRequest(customer);
+      updateCustomerRequest(customer, id);
     }
-    dispatch(setCustomersCreator(customer));
+    dispatch(setCustomersCreator(customer, customer.id));
   };
 };

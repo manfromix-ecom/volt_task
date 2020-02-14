@@ -3,23 +3,20 @@ import { connect } from 'react-redux';
 import { Customer } from 'MyModels';
 import { CustomerForm } from '../components/customers/CustomerForm';
 import { createUpdateCustomerRequest } from '../features/customers/reducer';
-import { useModal } from '../components/ButtonModal';
 
 interface ContainerProps {
   customer: Customer;
-  setCustomer: (customer: Customer) => void;
+  setCustomer: (customer: Customer, id: number | undefined) => void;
+  hideModal: () => void;
 }
 
 const FormContainer = (props: ContainerProps) => {
-  const { customer, setCustomer } = props;
-
-  const {show, setShow} = useModal(true);
+  const { customer, setCustomer, hideModal } = props;
 
   const onSubmit = (formData: any) => {
-    console.log('onSubmit', formData);
     const { name, address, phone } = formData;
-    setShow(false);
-    setCustomer({ name, address, phone });
+    hideModal();
+    setCustomer({ name, address, phone }, customer.id);
   };
   return <CustomerForm initialValues={customer} onSubmit={onSubmit} />;
 };
