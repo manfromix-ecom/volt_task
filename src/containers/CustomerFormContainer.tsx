@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Customer } from 'MyModels';
 import { CustomerForm } from '../components/customers/CustomerForm';
-import { createUpdateCustomerRequest } from '../features/customers/reducer';
+import { createCustomerRequest, updateCustomerRequest } from '../features/customers/reducer';
 
 interface ContainerProps {
   customer: Customer;
@@ -21,4 +21,5 @@ const FormContainer = (props: ContainerProps) => {
   return <CustomerForm initialValues={customer} onSubmit={onSubmit} />;
 };
 
-export const CustomerFormContainer = connect(null, { setCustomer: createUpdateCustomerRequest })(FormContainer);
+export const EditCustomerForm = connect(null, { setCustomer: updateCustomerRequest })(FormContainer);
+export const AddCustomerForm = connect(null, { setCustomer: createCustomerRequest })(FormContainer);

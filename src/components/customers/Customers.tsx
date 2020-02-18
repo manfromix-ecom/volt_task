@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal, useModal } from '../ButtonModal';
-import { CustomerFormContainer } from '../../containers/CustomerFormContainer';
+import { AddCustomerForm, EditCustomerForm } from '../../containers/CustomerFormContainer';
 import { deleteCustomerRequest } from '../../features/customers/reducer';
 
 interface Props {
@@ -24,7 +24,7 @@ const CustomerRow = ({ customer, hideModal }: { customer: Customer; hideModal: (
       <td>{phone}</td>
       <td>
         <ButtonGroup>
-          <ButtonModal title="Edit Customer" buttonText="Edit" body={<CustomerFormContainer customer={customer} hideModal={hideModal} />} />
+          <ButtonModal title="Edit Customer" buttonText="Edit" body={<EditCustomerForm customer={customer} hideModal={hideModal} />} />
           <Button variant="outline-secondary" onClick={onDelete}>
             Delete
           </Button>
@@ -44,7 +44,7 @@ export const PureCustomers = (props: Props) => {
     <>
       <h1>
         Customer List
-        <ButtonModal title="Add Customer" body={<CustomerFormContainer customer={{} as Customer} hideModal={hideModal} />} />
+        <ButtonModal title="Add Customer" body={<AddCustomerForm customer={{} as Customer} hideModal={hideModal} />} />
       </h1>
       <Table hover responsive>
         <thead>

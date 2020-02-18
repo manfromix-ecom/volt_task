@@ -16,9 +16,14 @@ interface FormProps {
   placeholder?: string;
   as?: any;
   plaintext?: boolean;
+  children?: JSX.Element | null;
 }
 
-export const FieldInput = ({ input, type, placeholder, as = 'input', plaintext = false }: FormProps) => {
+export const FieldInput = ({ input, type, placeholder, as = 'input', plaintext = false, children = null }: FormProps) => {
   const { value, onChange } = input;
-  return <Form.Control type={type} placeholder={placeholder} defaultValue={value} as={as} plaintext={plaintext} onChange={onChange} />;
+  return (
+    <Form.Control type={type} placeholder={placeholder} defaultValue={value} as={as} plaintext={plaintext} onChange={onChange}>
+      {children}
+    </Form.Control>
+  );
 };

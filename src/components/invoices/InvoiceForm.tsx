@@ -1,8 +1,8 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { InvoiceItems } from './InvoiceItems';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { InvoiceItems } from './InvoiceItems';
 import { FieldInput } from '../FormsControls/FieldInput';
 
 interface Props extends InjectedFormProps {}
@@ -17,7 +17,9 @@ export const PureForm = (props: Props) => {
       </Form.Group>
       <Form.Group controlId="customerId">
         <Form.Label column={false}>Customer</Form.Label>
-        <Field name="customerId" type="select" as="select" component={FieldInput} />
+        <Field name="customerId" type="select" as="select" component={FieldInput}>
+          <option value="">Select Customer</option>
+        </Field>
       </Form.Group>
       <Form.Label column={false}>Add product</Form.Label>
       <Button variant="outline-secondary" type="submit">

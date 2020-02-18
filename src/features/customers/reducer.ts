@@ -2,9 +2,10 @@ import { Customer } from 'MyModels';
 import { Dispatch } from 'redux';
 import { CREATE_CUSTOMER_REQUEST, DELETE_CUSTOMER_REQUEST, SET_CUSTOMER_REQUEST, UPDATE_CUSTOMER_REQUEST } from './constants';
 import { customersAPI } from '../../api/customers-api';
-import { addCustomerCreator, deleteCustomerCreator, setCustomersCreator, updateCustomerCreator } from './actions';
+import { addCustomerCreator, deleteCustomerCreator, setCustomersCreator } from './actions';
 
 export const customersReducer = (state: Customer[] = [], action: { type: any; data: Customer; id: number | undefined }) => {
+  console.log('customersReducer', state, action);
   switch (action.type) {
     case CREATE_CUSTOMER_REQUEST:
       return state.concat([action.data]);
@@ -30,18 +31,6 @@ export const customersReducer = (state: Customer[] = [], action: { type: any; da
   }
 };
 
-export const createCustomerRequest = (customer: Customer) => {
-  return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
-    await customersAPI.create(customer);
-    dispatch(addCustomerCreator(customer));
-  };
-};
-export const updateCustomerRequest = (customer: Customer, id: number | undefined) => {
-  return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
-    await customersAPI.update(customer);
-    dispatch(updateCustomerCreator(customer, id));
-  };
-};
 export const deleteCustomerRequest = (customer: Customer, id: number | undefined) => {
   console.log('deleteCustomerRequest', customer);
   return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
@@ -49,17 +38,18 @@ export const deleteCustomerRequest = (customer: Customer, id: number | undefined
     dispatch(deleteCustomerCreator(customer, id));
   };
 };
-
-export const createUpdateCustomerRequest = (customer: Customer, id: number | undefined) => {
-  console.log('createUpdateCustomerRequest', customer);
-  return async (dispatch: (arg0: { type: string; customer: Customer }) => void) => {
-    const toCreate = id && id > 0;
+export const createCustomerRequest = (customer: Customer) => {
+  console.log('createCustomerRequest', customer);
+  return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
     await customersAPI.create(customer);
-    if (toCreate) {
-      createCustomerRequest(customer);
-    } else {
-      updateCustomerRequest(customer, id);
-    }
+    dispatch(addCustomerCreator(customer));
     dispatch(setCustomersCreator(customer, customer.id));
+  };
+};
+export const updateCustomerRequest = (customer: Customer, id: number | undefined) => {
+  console.log('updateCustomerRequest', customer);
+  return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
+    await customersAPI.update(customer);
+    dispatch(setCustomersCreator(customer, id));
   };
 };
