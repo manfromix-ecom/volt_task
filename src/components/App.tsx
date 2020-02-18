@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { RouteComponentProps } from '@reach/router';
+import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { withSuspense } from '../hoc/withSuspense';
 import { Header } from './Header';
 import './App.scss';

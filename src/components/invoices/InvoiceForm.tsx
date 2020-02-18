@@ -9,6 +9,7 @@ interface Props extends InjectedFormProps {}
 
 export const PureForm = (props: Props) => {
   const { handleSubmit } = props;
+
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="discount">

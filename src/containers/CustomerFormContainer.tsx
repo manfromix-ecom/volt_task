@@ -15,6 +15,7 @@ const FormContainer = (props: ContainerProps) => {
 
   const onSubmit = (formData: any) => {
     const { name, address, phone } = formData;
+    console.log('formData', formData);
     hideModal();
     setCustomer({ name, address, phone }, customer.id);
   };
