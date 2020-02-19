@@ -5,4 +5,4 @@ export interface CustomersProps {
   customers: Customer[];
 }
 
-export interface CustomerFormProps extends InjectedFormProps {}
+export interface CustomerFormProps extends InjectedFormProps<Customer> {}
