@@ -6,10 +6,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal } from '../ButtonModal';
 import { ProductFormContainer } from '../../containers/ProductFormContainer';
 import { deleteProductRequest } from '../../features/products/reducer';
-
-interface Props {
-  products: Product[];
-}
+import { ProductsProps } from './types/ProductsProps';
 
 const ProductRow = ({ product }: { product: Product }) => {
   const { id, name, price } = product;
@@ -33,7 +30,7 @@ const ProductRow = ({ product }: { product: Product }) => {
   );
 };
 
-export const PureProducts = (props: Props) => {
+export const PureProducts = (props: ProductsProps) => {
   document.title = 'Products';
   const { products } = props;
 

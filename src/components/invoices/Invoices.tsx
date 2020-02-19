@@ -6,10 +6,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal, useModal } from '../ButtonModal';
 import { InvoiceFormContainer } from '../../containers/InvoiceFormContainer';
 import { deleteInvoiceRequest } from '../../features/invoices/reducer';
-
-interface Props {
-  invoices: Invoice[];
-}
+import { InvoicesProps } from './types/InvoicesProps';
 
 const InvoiceRow = ({ invoice, hideModal }: { invoice: Invoice; hideModal: () => void }) => {
   const { id, customerId, discount, total } = invoice;
@@ -34,7 +31,7 @@ const InvoiceRow = ({ invoice, hideModal }: { invoice: Invoice; hideModal: () =>
   );
 };
 
-export const PureInvoices = (props: Props) => {
+export const PureInvoices = (props: InvoicesProps) => {
   document.title = 'Invoices';
   const { invoices } = props;
 

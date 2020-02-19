@@ -6,10 +6,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal, useModal } from '../ButtonModal';
 import { AddCustomerForm, EditCustomerForm } from '../../containers/CustomerFormContainer';
 import { deleteCustomerRequest } from '../../features/customers/reducer';
-
-interface Props {
-  customers: Customer[];
-}
+import { CustomersProps } from './types/CustomersProps';
 
 const CustomerRow = ({ customer, hideModal }: { customer: Customer; hideModal: () => void }) => {
   const { id, name, address, phone } = customer;
@@ -34,7 +31,7 @@ const CustomerRow = ({ customer, hideModal }: { customer: Customer; hideModal: (
   );
 };
 
-export const PureCustomers = (props: Props) => {
+const PureCustomers = (props: CustomersProps) => {
   document.title = 'Customers';
   const { customers } = props;
 

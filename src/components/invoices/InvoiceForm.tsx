@@ -1,13 +1,12 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { InvoiceItems } from './InvoiceItems';
 import { FieldInput } from '../FormsControls/FieldInput';
+import { InvoiceFormProps } from './types/InvoicesProps';
 
-interface Props extends InjectedFormProps {}
-
-export const PureForm = (props: Props) => {
+const PureForm = (props: InvoiceFormProps) => {
   const { handleSubmit } = props;
 
   return (

@@ -1,14 +1,10 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Product } from 'MyModels';
 import { InjectedFormProps } from 'redux-form';
+import { ProductProps } from './types/ProductsProps';
 
-export interface Props {
-  product: Product;
-}
-
-export const ProductForm: React.FunctionComponent<Props & InjectedFormProps<{}, Props>> = ({ product, handleSubmit }) => {
+export const ProductForm: React.FunctionComponent<ProductProps & InjectedFormProps<{}, ProductProps>> = ({ product, handleSubmit }) => {
   const { name, price } = product;
 
   return (

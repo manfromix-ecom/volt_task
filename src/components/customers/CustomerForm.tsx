@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { FieldInput } from '../FormsControls/FieldInput';
+import { CustomerFormProps } from './types/CustomersProps';
 
-interface CustomerFormProps extends InjectedFormProps {}
+export const PureForm: React.FC<CustomerFormProps> = (props) => {
+  const { handleSubmit, initialValues, initialize } = props;
+  console.log('initialValues', initialValues);
+  // const { name, address, phone } = initialValues;
 
-export const PureForm = (props: CustomerFormProps) => {
-  const { handleSubmit } = props;
+  // useEffect(() => {
+  //   initialize({ name: initialValues.name, address: initialValues.address, phone: initialValues.phone });
+  // }, []);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -30,4 +35,4 @@ export const PureForm = (props: CustomerFormProps) => {
   );
 };
 
-export const CustomerForm = reduxForm<{}>({ form: 'customer_form' })(PureForm);
+export const CustomerForm = reduxForm<{}>({ form: 'customerForm', enableReinitialize: true })(PureForm);

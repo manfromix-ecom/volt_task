@@ -5,7 +5,6 @@ import { customersAPI } from '../../api/customers-api';
 import { addCustomerCreator, deleteCustomerCreator, setCustomersCreator } from './actions';
 
 export const customersReducer = (state: Customer[] = [], action: { type: any; data: Customer; id: number | undefined }) => {
-  console.log('customersReducer', state, action);
   switch (action.type) {
     case CREATE_CUSTOMER_REQUEST:
       return state.concat([action.data]);

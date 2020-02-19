@@ -1,4 +1,4 @@
-/**export let fakeState = {
+export let fakeState = {
   customers: [
     { id: 1, name: 'Mark Benson', address: '353 Rochester St, Rialto FL 43250', phone: '555-534-2342' },
     { id: 2, name: 'Bob Smith', address: '215 Market St, Dansville CA 94325', phone: '555-534-2342' },
@@ -17,11 +17,11 @@
   invoices: [
     { id: 1, invoice_id: 1, product_id: 1, quantity: 2 },
   ],
-};*/
+};
 
-export const fakeState = {
+/*export const fakeState = {
   customers: [],
   products: [],
   invoice_items: [],
   invoices: [],
-};
+};*/

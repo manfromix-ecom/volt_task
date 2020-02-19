@@ -1,16 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Customer } from 'MyModels';
 import { CustomerForm } from '../components/customers/CustomerForm';
 import { createCustomerRequest, updateCustomerRequest } from '../features/customers/reducer';
+import { CustomerContainerProps } from './types/CustomerContainerProps';
 
-interface ContainerProps {
-  customer: Customer;
-  setCustomer: (customer: Customer, id: number | undefined) => void;
-  hideModal: () => void;
-}
-
-const FormContainer = (props: ContainerProps) => {
+const FormContainer = (props: CustomerContainerProps) => {
   const { customer, setCustomer, hideModal } = props;
 
   const onSubmit = (formData: any) => {

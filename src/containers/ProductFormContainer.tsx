@@ -1,18 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Product } from 'MyModels';
 import { reduxForm } from 'redux-form';
-import { ProductForm, Props } from '../components/products/ProductForm';
+import { ProductForm } from '../components/products/ProductForm';
 import { createUpdateProductRequest } from '../features/products/reducer';
+import { ProductProps } from '../components/products/types/ProductsProps';
+import { ProductContainerProps } from './types/ProductContainerProps';
 
-interface ContainerProps {
-  product: Product;
-  setProduct: (product: Product) => void;
-}
-
-const FormContainer = (props: ContainerProps) => {
+const FormContainer = (props: ProductContainerProps) => {
   const { product, setProduct } = props;
-  const RxForm = reduxForm<{}, Props>({ form: 'product_form', initialValues: product, enableReinitialize: true })(ProductForm);
+  const RxForm = reduxForm<{}, ProductProps>({ form: 'productForm', initialValues: product, enableReinitialize: true })(ProductForm);
   const onSubmit = (formData: any) => {
     const { name, price } = formData;
     setProduct({ name, price });
