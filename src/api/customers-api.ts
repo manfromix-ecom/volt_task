@@ -12,9 +12,16 @@ const mapToModel = ({ data }: AxiosResponse<any[]>): Customer[] =>
 
 export const customersAPI = {
   index(): Promise<Customer[]> {
-    return apiClient.get('customers/').then((response) => {
-      return mapToModel(response);
-    });
+    return apiClient
+      .get('customers/')
+      .then((response) => {
+        console.log(response);
+        return mapToModel(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        return [] as Customer[];
+      });
   },
   show(customer: Customer) {
     const { id } = customer;

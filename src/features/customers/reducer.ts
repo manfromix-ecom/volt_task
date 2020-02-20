@@ -1,16 +1,21 @@
 import { Customer } from 'MyModels';
 import { Dispatch } from 'redux';
+import merge from 'lodash/merge';
+
 import {
   CREATE_CUSTOMER_REQUEST,
   DELETE_CUSTOMER_REQUEST,
   LOAD_CUSTOMERS_REQUEST,
   SET_CUSTOMER_REQUEST,
+  SET_CUSTOMERS,
   UPDATE_CUSTOMER_REQUEST,
 } from './constants';
 import { customersAPI } from '../../api/customers-api';
-import { addCustomerCreator, deleteCustomerCreator, loadCustomersCreator, setCustomersCreator } from './actions';
+import { addCustomerCreator, deleteCustomerCreator, setCustomerCreator, setCustomersCreator } from './actions';
 
-export const customersReducer = (state: Customer[] = [], action: { type: any; data: Customer; id: number | undefined }) => {
+const initialState: Customer[] = [];
+
+export const customersReducer = (state: Customer[] = initialState, action: { type: string; data: any; id: number | undefined }) => {
   switch (action.type) {
     case CREATE_CUSTOMER_REQUEST:
       return state.concat([action.data]);
@@ -31,8 +36,8 @@ export const customersReducer = (state: Customer[] = [], action: { type: any; da
         }
         return customer;
       });
-    case LOAD_CUSTOMERS_REQUEST:
-      return state;
+    case SET_CUSTOMERS:
+      return merge({}, state, action.data);
     default:
       return state;
   }
@@ -48,20 +53,23 @@ export const createCustomerRequest = (customer: Customer) => {
   return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
     await customersAPI.create(customer);
     dispatch(addCustomerCreator(customer));
-    dispatch(setCustomersCreator(customer, customer.id));
+    dispatch(setCustomerCreator(customer, customer.id));
   };
 };
 export const updateCustomerRequest = (customer: Customer, id: number | undefined) => {
   return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
     await customersAPI.update(customer);
-    dispatch(setCustomersCreator(customer, id));
+    dispatch(setCustomerCreator(customer, id));
   };
 };
 export const loadCustomersRequest = () => {
   console.log('loadCustomersRequest');
   return async (dispatch: Dispatch<{ type: string; customers: Customer[] }>) => {
-    const data = await customersAPI.index();
-    console.log('loadCustomersRequest', data);
-    dispatch(loadCustomersCreator(data));
+    // const data = await customersAPI.index();
+    customersAPI.index().then((data) => {
+      console.log('loadCustomersRequest', data);
+      dispatch(setCustomersCreator(data));
+    });
+
   };
 };

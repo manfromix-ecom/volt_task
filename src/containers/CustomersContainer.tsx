@@ -10,7 +10,7 @@ export const CustomersContainer: React.FC = () => {
   useEffect(() => {
     const loadCustomerCollection = () => {
       loadCustomersRequest();
-      customersAPI.index().then((collection) => setCustomerCollection(collection));
+      // customersAPI.index().then((collection) => setCustomerCollection(collection));
     };
     loadCustomerCollection();
   }, []);

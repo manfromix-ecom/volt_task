@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal, useModal } from '../ButtonModal';
 import { AddCustomerForm, EditCustomerForm } from '../../containers/CustomerFormContainer';
-import { deleteCustomerRequest } from '../../features/customers/reducer';
+import { deleteCustomerRequest, loadCustomersRequest } from '../../features/customers/reducer';
 import { CustomersProps } from './types/CustomersProps';
 
 const CustomerRow = ({ customer, hideModal }: { customer: Customer; hideModal: () => void }) => {
@@ -13,6 +13,7 @@ const CustomerRow = ({ customer, hideModal }: { customer: Customer; hideModal: (
   const onDelete = () => {
     deleteCustomerRequest(customer, id);
   };
+
   return (
     <tr>
       <td>{id}</td>
@@ -39,11 +40,18 @@ const PureCustomers = (props: CustomersProps) => {
 
   const newCustomer: Customer = { name: '', address: '', phone: '' };
 
+  const onLoad = () => {
+    loadCustomersRequest();
+  };
+
   return (
     <>
       <h1>
         Customer List
         <ButtonModal title="Add Customer" body={<AddCustomerForm customer={newCustomer} hideModal={hideModal} />} />
+        <Button variant="outline-secondary" onClick={onLoad}>
+          Load
+        </Button>
       </h1>
       <Table hover responsive>
         <thead>
