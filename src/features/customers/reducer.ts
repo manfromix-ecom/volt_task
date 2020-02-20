@@ -1,8 +1,14 @@
 import { Customer } from 'MyModels';
 import { Dispatch } from 'redux';
-import { CREATE_CUSTOMER_REQUEST, DELETE_CUSTOMER_REQUEST, SET_CUSTOMER_REQUEST, UPDATE_CUSTOMER_REQUEST } from './constants';
+import {
+  CREATE_CUSTOMER_REQUEST,
+  DELETE_CUSTOMER_REQUEST,
+  LOAD_CUSTOMERS_REQUEST,
+  SET_CUSTOMER_REQUEST,
+  UPDATE_CUSTOMER_REQUEST,
+} from './constants';
 import { customersAPI } from '../../api/customers-api';
-import { addCustomerCreator, deleteCustomerCreator, setCustomersCreator } from './actions';
+import { addCustomerCreator, deleteCustomerCreator, loadCustomersCreator, setCustomersCreator } from './actions';
 
 export const customersReducer = (state: Customer[] = [], action: { type: any; data: Customer; id: number | undefined }) => {
   switch (action.type) {
@@ -25,6 +31,8 @@ export const customersReducer = (state: Customer[] = [], action: { type: any; da
         }
         return customer;
       });
+    case LOAD_CUSTOMERS_REQUEST:
+      return state;
     default:
       return state;
   }
@@ -47,5 +55,13 @@ export const updateCustomerRequest = (customer: Customer, id: number | undefined
   return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
     await customersAPI.update(customer);
     dispatch(setCustomersCreator(customer, id));
+  };
+};
+export const loadCustomersRequest = () => {
+  console.log('loadCustomersRequest');
+  return async (dispatch: Dispatch<{ type: string; customers: Customer[] }>) => {
+    const data = await customersAPI.index();
+    console.log('loadCustomersRequest', data);
+    dispatch(loadCustomersCreator(data));
   };
 };
