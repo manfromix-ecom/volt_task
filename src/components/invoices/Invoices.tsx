@@ -4,14 +4,14 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal, useModal } from '../ButtonModal';
-import { InvoiceFormContainer } from '../../containers/InvoiceFormContainer';
+import { AddInvoiceForm, EditInvoiceForm } from '../../containers/InvoiceFormContainer';
 import { deleteInvoiceRequest } from '../../features/invoices/reducer';
 import { InvoicesProps } from './types/InvoicesProps';
 
 const InvoiceRow = ({ invoice, hideModal }: { invoice: Invoice; hideModal: () => void }) => {
   const { id, customerId, discount, total } = invoice;
   const onDelete = () => {
-    deleteInvoiceRequest(invoice);
+    deleteInvoiceRequest(invoice, id);
   };
   return (
     <tr>
@@ -21,7 +21,7 @@ const InvoiceRow = ({ invoice, hideModal }: { invoice: Invoice; hideModal: () =>
       <td>{total}</td>
       <td>
         <ButtonGroup>
-          <ButtonModal title="Edit Invoice" buttonText="Edit" body={<InvoiceFormContainer invoice={invoice} hideModal={hideModal} />} />
+          <ButtonModal title="Edit Invoice" buttonText="Edit" body={<EditInvoiceForm invoice={invoice} hideModal={hideModal} />} />
           <Button variant="outline-secondary" onClick={onDelete}>
             Delete
           </Button>
@@ -37,11 +37,13 @@ export const PureInvoices = (props: InvoicesProps) => {
 
   const { hideModal } = useModal(true);
 
+  const newInvoice: Invoice = { customerId: 0, discount: 0, total: 0 };
+
   return (
     <>
       <h1>
         Invoice List
-        <ButtonModal title="Add Invoice" body={<InvoiceFormContainer invoice={{} as Invoice} hideModal={hideModal} />} />
+        <ButtonModal title="Add Invoice" body={<AddInvoiceForm invoice={newInvoice} hideModal={hideModal} />} />
       </h1>
       <Table hover responsive>
         <thead>

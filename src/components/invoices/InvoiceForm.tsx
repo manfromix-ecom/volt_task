@@ -1,25 +1,29 @@
 import React from 'react';
+import { useFormik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Field, reduxForm } from 'redux-form';
 import { InvoiceItems } from './InvoiceItems';
-import { FieldInput } from '../FormsControls/FieldInput';
 import { InvoiceFormProps } from './types/InvoicesProps';
 
-const PureForm = (props: InvoiceFormProps) => {
-  const { handleSubmit } = props;
+export const InvoiceForm = (props: InvoiceFormProps) => {
+  const { onSubmit, initialValues } = props;
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+  });
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={formik.handleSubmit}>
       <Form.Group controlId="discount">
         <Form.Label column={false}>Discount (%)</Form.Label>
-        <Field name="discount" type="text" component={FieldInput} />
+        <Form.Control name="discount" type="text" value={String(formik.values.discount)} onChange={formik.handleChange} />
       </Form.Group>
       <Form.Group controlId="customerId">
         <Form.Label column={false}>Customer</Form.Label>
-        <Field name="customerId" type="select" as="select" component={FieldInput}>
+        <Form.Control name="customerId" type="select" as="select" value={String(formik.values.customerId)} onChange={formik.handleChange}>
           <option value="">Select Customer</option>
-        </Field>
+        </Form.Control>
       </Form.Group>
       <Form.Label column={false}>Add product</Form.Label>
       <Button variant="outline-secondary" type="submit">
@@ -28,10 +32,8 @@ const PureForm = (props: InvoiceFormProps) => {
       <InvoiceItems />
       <h2>
         Total:
-        <Field name="total" type="span" plaintext={true} component={FieldInput} />
+        {String(formik.values.total)}
       </h2>
     </Form>
   );
 };
-
-export const InvoiceForm = reduxForm<{}>({ form: 'customer_form' })(PureForm);

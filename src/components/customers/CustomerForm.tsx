@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { CustomerFormProps } from './types/CustomersProps';
 
-export const CustomerForm: React.FC<CustomerFormProps> = (props) => {
+export const CustomerForm = (props: CustomerFormProps) => {
   const { onSubmit, initialValues } = props;
 
   const formik = useFormik({
@@ -32,5 +32,3 @@ export const CustomerForm: React.FC<CustomerFormProps> = (props) => {
     </Form>
   );
 };
-
-// export const CustomerForm = reduxForm<Customer>({ form: 'customerForm', enableReinitialize: true })(PureForm);

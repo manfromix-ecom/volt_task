@@ -5,6 +5,7 @@ export interface ProductsProps {
 }
 
 
-export interface ProductProps {
-  product: Product;
+export interface ProductFormProps {
+  initialValues: Product;
+  onSubmit: (formData: any) => void;
 }

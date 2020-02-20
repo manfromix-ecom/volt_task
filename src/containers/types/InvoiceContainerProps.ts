@@ -2,7 +2,7 @@ import { Customer, Invoice } from 'MyModels';
 
 export interface InvoiceContainerProps {
   invoice: Invoice;
-  setInvoice: (invoice: Invoice) => void;
+  setInvoice: (invoice: Invoice, id: number | undefined) => void;
   hideModal: () => void;
-  customers: Customer[];
+  customers?: Customer[];
 }

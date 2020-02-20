@@ -31,14 +31,12 @@ export const customersReducer = (state: Customer[] = [], action: { type: any; da
 };
 
 export const deleteCustomerRequest = (customer: Customer, id: number | undefined) => {
-  console.log('deleteCustomerRequest', customer);
   return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
     await customersAPI.delete(customer);
     dispatch(deleteCustomerCreator(customer, id));
   };
 };
 export const createCustomerRequest = (customer: Customer) => {
-  console.log('createCustomerRequest', customer);
   return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
     await customersAPI.create(customer);
     dispatch(addCustomerCreator(customer));
@@ -46,7 +44,6 @@ export const createCustomerRequest = (customer: Customer) => {
   };
 };
 export const updateCustomerRequest = (customer: Customer, id: number | undefined) => {
-  console.log('updateCustomerRequest', customer);
   return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
     await customersAPI.update(customer);
     dispatch(setCustomersCreator(customer, id));

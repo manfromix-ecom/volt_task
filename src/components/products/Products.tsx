@@ -3,15 +3,15 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { ButtonModal } from '../ButtonModal';
-import { ProductFormContainer } from '../../containers/ProductFormContainer';
+import { ButtonModal, useModal } from '../ButtonModal';
+import { AddProductForm, EditProductForm } from '../../containers/ProductFormContainer';
 import { deleteProductRequest } from '../../features/products/reducer';
 import { ProductsProps } from './types/ProductsProps';
 
-const ProductRow = ({ product }: { product: Product }) => {
+const ProductRow = ({ product, hideModal }: { product: Product; hideModal: () => void }) => {
   const { id, name, price } = product;
   const onDelete = () => {
-    deleteProductRequest(product);
+    deleteProductRequest(product, id);
   };
   return (
     <tr>
@@ -20,7 +20,7 @@ const ProductRow = ({ product }: { product: Product }) => {
       <td>{price}</td>
       <td>
         <ButtonGroup>
-          <ButtonModal title="Edit Product" buttonText="Edit" body={<ProductFormContainer product={product} />} />
+          <ButtonModal title="Edit Product" buttonText="Edit" body={<EditProductForm product={product} hideModal={hideModal} />} />
           <Button variant="outline-secondary" onClick={onDelete}>
             Delete
           </Button>
@@ -30,15 +30,19 @@ const ProductRow = ({ product }: { product: Product }) => {
   );
 };
 
-export const PureProducts = (props: ProductsProps) => {
+const PureProducts = (props: ProductsProps) => {
   document.title = 'Products';
   const { products } = props;
+
+  const { hideModal } = useModal(true);
+
+  const newProduct: Product = { name: '', price: '' };
 
   return (
     <>
       <h1>
         Product List
-        <ButtonModal title="Add Product" body={<ProductFormContainer product={{} as Product} />} />
+        <ButtonModal title="Add Product" body={<AddProductForm product={newProduct} hideModal={hideModal} />} />
       </h1>
       <Table hover responsive>
         <thead>
@@ -51,7 +55,7 @@ export const PureProducts = (props: ProductsProps) => {
         </thead>
         <tbody>
           {products.map((product) => (
-            <ProductRow key={product.id} product={product} />
+            <ProductRow key={product.id} product={product} hideModal={hideModal} />
           ))}
         </tbody>
       </Table>

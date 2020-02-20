@@ -1,24 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { InvoiceForm } from '../components/invoices/InvoiceForm';
-import { createUpdateInvoiceRequest } from '../features/invoices/reducer';
-import { fakeState } from '../store/fakeState';
+import { createInvoiceRequest, updateInvoiceRequest } from '../features/invoices/reducer';
 import { InvoiceContainerProps } from './types/InvoiceContainerProps';
 
 const FormContainer = (props: InvoiceContainerProps) => {
-  const { invoice, setInvoice, hideModal, customers } = props;
-  console.log(customers);
+  const { invoice, setInvoice, hideModal } = props;
 
   const onSubmit = (formData: any) => {
     const { customerId, discount, total } = formData;
+    console.log('formData', formData, invoice);
     hideModal();
-    setInvoice({ customerId, discount, total });
+    setInvoice({ customerId, discount, total, id: invoice.id }, invoice.id);
   };
   return <InvoiceForm initialValues={invoice} onSubmit={onSubmit} />;
 };
 
-const mapStateToProps = (state: any) => ({
-  customers: fakeState.customers,
-});
-
-export const InvoiceFormContainer = connect(mapStateToProps, { setInvoice: createUpdateInvoiceRequest })(FormContainer);
+export const EditInvoiceForm = connect(null, { setInvoice: updateInvoiceRequest })(FormContainer);
+export const AddInvoiceForm = connect(null, { setInvoice: createInvoiceRequest })(FormContainer);
