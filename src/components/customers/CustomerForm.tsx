@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useFormik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Field, reduxForm } from 'redux-form';
-import { Customer } from 'MyModels';
-import { FieldInput } from '../FormsControls/FieldInput';
 import { CustomerFormProps } from './types/CustomersProps';
 
-export const PureForm: React.FC<CustomerFormProps> = (props) => {
-  const { handleSubmit, initialValues, initialize } = props;
-  const { name, address, phone } = initialValues;
-  console.log('initialValues', initialValues);
+export const CustomerForm: React.FC<CustomerFormProps> = (props) => {
+  const { onSubmit, initialValues } = props;
 
-  useEffect(() => {
-    initialize({ name, address, phone });
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
   });
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={formik.handleSubmit}>
       <Form.Group controlId="name">
         <Form.Label column={false}>Name</Form.Label>
-        <Field name="name" type="text" component={FieldInput} {...props} />
+        <Form.Control name="name" type="text" value={formik.values.name} onChange={formik.handleChange} />
       </Form.Group>
       <Form.Group controlId="address">
         <Form.Label column={false}>Address</Form.Label>
-        <Field name="address" type="text" component={FieldInput} {...props} />
+        <Form.Control name="address" type="text" value={formik.values.address} onChange={formik.handleChange} />
       </Form.Group>
       <Form.Group controlId="phone">
         <Form.Label column={false}>Phone</Form.Label>
-        <Field name="phone" type="text" component={FieldInput} {...props} />
+        <Form.Control name="phone" type="text" value={formik.values.phone} onChange={formik.handleChange} />
       </Form.Group>
       <Button variant="outline-secondary" type="submit">
         Save
@@ -36,4 +33,4 @@ export const PureForm: React.FC<CustomerFormProps> = (props) => {
   );
 };
 
-export const CustomerForm = reduxForm<Customer>({ form: 'customerForm', enableReinitialize: true })(PureForm);
+// export const CustomerForm = reduxForm<Customer>({ form: 'customerForm', enableReinitialize: true })(PureForm);

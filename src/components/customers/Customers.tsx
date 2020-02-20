@@ -37,11 +37,13 @@ const PureCustomers = (props: CustomersProps) => {
 
   const { hideModal } = useModal(true);
 
+  const newCustomer: Customer = { name: '', address: '', phone: '' };
+
   return (
     <>
       <h1>
         Customer List
-        <ButtonModal title="Add Customer" body={<AddCustomerForm customer={{} as Customer} hideModal={hideModal} />} />
+        <ButtonModal title="Add Customer" body={<AddCustomerForm customer={newCustomer} hideModal={hideModal} />} />
       </h1>
       <Table hover responsive>
         <thead>
