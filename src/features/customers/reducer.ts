@@ -64,12 +64,11 @@ export const updateCustomerRequest = (customer: Customer, id: number | undefined
 };
 export const loadCustomersRequest = () => {
   console.log('loadCustomersRequest');
-  return async (dispatch: Dispatch<{ type: string; customers: Customer[] }>) => {
-    // const data = await customersAPI.index();
-    customersAPI.index().then((data) => {
-      console.log('loadCustomersRequest', data);
-      dispatch(setCustomersCreator(data));
-    });
-
+  const response = async (dispatch: Dispatch<{ type: string; customers: Customer[] }>) => {
+    console.log('loadCustomersRequest async');
+    const data = await customersAPI.index();
+    console.log('loadCustomersRequest data', data);
+    dispatch(setCustomersCreator(data));
   };
+  return response;
 };

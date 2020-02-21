@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 
-import { reducer as formReducer } from 'redux-form';
 import { customersReducer } from '../features/customers/reducer';
 import { productsReducer } from '../features/products/reducer';
 import { invoicesReducer } from '../features/invoices/reducer';
@@ -12,7 +11,6 @@ export const rootReducer = () =>
     products: productsReducer,
     invoices: invoicesReducer,
     invoiceItems: invoiceItemsReducer,
-    forms: formReducer,
   });
 
 export default rootReducer;
