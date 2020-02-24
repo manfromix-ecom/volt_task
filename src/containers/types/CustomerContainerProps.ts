@@ -2,6 +2,6 @@ import { Customer } from 'MyModels';
 
 export interface CustomerContainerProps {
   customer: Customer;
-  setCustomer: (customer: Customer, id: number | undefined) => void;
+  setCustomer: (customer: Customer) => void;
   hideModal: () => void;
 }

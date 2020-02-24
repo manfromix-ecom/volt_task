@@ -11,7 +11,7 @@ const FormContainer = (props: CustomerContainerProps) => {
     const { name, address, phone } = formData;
     console.log('formData', formData, customer);
     hideModal();
-    setCustomer({ name, address, phone, id: customer.id }, customer.id);
+    setCustomer({ name, address, phone, id: customer.id });
   };
   return <CustomerForm initialValues={customer} onSubmit={onSubmit} />;
 };

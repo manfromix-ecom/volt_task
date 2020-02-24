@@ -1,0 +1,14 @@
+.idea/*
+.vscode/*
+
+/coverage
+/node_modules
+/build
+
+.DS_Store
+
+#/Materials
+
+package-lock.json
+yarn.lock
+*.sqlite

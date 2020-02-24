@@ -10,7 +10,7 @@ export const CustomerRow = (props: CustomerRowProps) => {
   const { customer, hideModal } = props;
   const { id, name, address, phone } = customer;
   const onDelete = () => {
-    deleteCustomerRequest(customer, id);
+    deleteCustomerRequest(customer);
   };
 
   return (

@@ -2,7 +2,6 @@
 
 import { Customer } from 'MyModels';
 import { Dispatch } from 'redux';
-import merge from 'lodash/merge';
 
 import {
   CREATE_CUSTOMER_REQUEST,
@@ -16,20 +15,18 @@ import { addCustomerCreator, deleteCustomerCreator, setCustomerCreator, setCusto
 
 const initialState: Customer[] = [];
 
-export const customersReducer = (
-  state: Customer[] = initialState,
-  action: { type: string; data: any; id: number | undefined }
-): Customer[] => {
+export const customersReducer = (state: Customer[] = initialState, action: { type: string; data: any }): Customer[] => {
+  console.log(action);
   switch (action.type) {
     case CREATE_CUSTOMER_REQUEST:
       return state.concat([action.data]);
     case DELETE_CUSTOMER_REQUEST:
-      return state.filter((customer) => customer.id !== action.id);
+      return state.filter((customer) => customer.id !== action.data.id);
     case UPDATE_CUSTOMER_REQUEST:
-      return state.map((customer) => (customer.id === action.id ? { ...customer, editing: !customer.editing } : customer));
+      return state.map((customer) => (customer.id === action.data.id ? { ...customer, editing: !customer.editing } : customer));
     case SET_CUSTOMER_REQUEST:
       return state.map((customer) => {
-        if (customer.id === action.id) {
+        if (customer.id === action.data.id) {
           return {
             ...customer,
             name: action.data.name,
@@ -41,29 +38,34 @@ export const customersReducer = (
         return customer;
       });
     case SET_CUSTOMERS:
-      return merge({}, state, action.data);
+      console.log(SET_CUSTOMERS, action.data, state.concat(action.data));
+      return state.concat(action.data);
     default:
       return state;
   }
 };
 
-export const deleteCustomerRequest = (customer: Customer, id: number | undefined) => {
-  return async (dispatch: Dispatch<any>) => {
-    await customersAPI.delete(customer);
-    dispatch(deleteCustomerCreator(customer, id));
+export const deleteCustomerRequest = (customer: Customer) => {
+  console.log('deleteCustomerRequest');
+  return (dispatch: Dispatch<any>) => {
+    console.log('deleteCustomerRequest customer', customer);
+    customersAPI
+      .delete(customer)
+      .then(() => dispatch(deleteCustomerCreator(customer)))
+      .catch(console.error);
   };
 };
 export const createCustomerRequest = (customer: Customer) => {
   return async (dispatch: Dispatch<any>) => {
-    await customersAPI.create(customer);
+    const data: any = await customersAPI.create(customer);
+    if (data.id) customer.id = data.id;
     dispatch(addCustomerCreator(customer));
-    dispatch(setCustomerCreator(customer, customer.id));
   };
 };
-export const updateCustomerRequest = (customer: Customer, id: number | undefined) => {
+export const updateCustomerRequest = (customer: Customer) => {
   return async (dispatch: Dispatch<any>) => {
     await customersAPI.update(customer);
-    dispatch(setCustomerCreator(customer, id));
+    dispatch(setCustomerCreator(customer));
   };
 };
 export const loadCustomersRequest = () => {

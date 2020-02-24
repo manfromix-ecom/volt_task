@@ -13,7 +13,7 @@ export interface CustomerRowProps {
 
 export interface CustomerDispatchProps {
   loadCustomersRequest: () => void;
-  deleteCustomerRequest: (customer: Customer, id: number) => void;
+  deleteCustomerRequest: (customer: Customer) => void;
 }
 
 export interface CustomerFormProps {
