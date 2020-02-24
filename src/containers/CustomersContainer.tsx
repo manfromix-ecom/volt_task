@@ -1,32 +1,27 @@
 import { connect } from 'react-redux';
-import { Customer } from 'MyModels';
+import { bindActionCreators, Dispatch } from 'redux';
 import { deleteCustomerRequest, loadCustomersRequest } from '../features/customers/reducer';
 import { Customers } from '../components/customers/Customers';
+import { CustomerDispatchProps, CustomersStateProps } from '../components/customers/types/CustomersProps';
 
-interface MapStateToPropsTypes {
-  customers: Customer[];
-}
-
-interface MapDispatchToPropsTypes {
-  load: () => void;
-  delete: (customer: Customer, id: number) => void;
-}
-
-const mapStateToProps = (state: any) => {
-  console.log('mapStateToProps customers', state);
+const mapStateToProps = (state: any): CustomersStateProps => {
   return {
     customers: state.customers,
   };
 };
 
-const mapDispatchToProps = () => {
-  return {
-    load: loadCustomersRequest,
-    delete: deleteCustomerRequest,
-  };
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  const combinedActions: CustomerDispatchProps = Object.assign(
+    {},
+    {
+      loadCustomersRequest,
+      deleteCustomerRequest,
+    }
+  );
+  return bindActionCreators(combinedActions as any, dispatch);
 };
 
-export const CustomersContainer = connect<MapStateToPropsTypes, MapDispatchToPropsTypes>(mapStateToProps, {
-  load: loadCustomersRequest,
-  delete: deleteCustomerRequest,
-})(Customers);
+export const CustomersContainer = connect<CustomersStateProps, CustomerDispatchProps, {}, any>(
+  mapStateToProps,
+  mapDispatchToProps as any
+)(Customers);

@@ -10,33 +10,24 @@ import { CustomerRow } from './CustomerRow';
 const PureCustomers = (props: CustomersProps) => {
   document.title = 'Customers';
   console.log('CustomersProps', props);
-  const { customers, load } = props;
+  const { customers, loadCustomersRequest } = props;
   const { hideModal } = useModal(true);
   const [customersState, setCustomersState] = useState(customers);
 
   useEffect(() => {
     if (!customersState) {
-      load();
+      loadCustomersRequest();
       setCustomersState(customers);
     }
-  }, [customers, customersState, load]);
-
-  // if (!customers) {
-  //   return <Loading />;
-  // }
+  }, [customers, customersState, loadCustomersRequest]);
 
   const newCustomer: Customer = { name: '', address: '', phone: '' };
-
-  const onLoad = () => {
-    load();
-  };
-
   return (
     <>
       <h1>
         Customer List
         <ButtonModal title="Add Customer" body={<AddCustomerForm customer={newCustomer} hideModal={hideModal} />} />
-        <Button variant="outline-secondary" onClick={onLoad}>
+        <Button variant="outline-secondary" onClick={loadCustomersRequest}>
           Load
         </Button>
       </h1>

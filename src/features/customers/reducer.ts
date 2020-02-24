@@ -1,3 +1,5 @@
+/* eslint no-console: off */
+
 import { Customer } from 'MyModels';
 import { Dispatch } from 'redux';
 import merge from 'lodash/merge';
@@ -18,7 +20,6 @@ export const customersReducer = (
   state: Customer[] = initialState,
   action: { type: string; data: any; id: number | undefined }
 ): Customer[] => {
-  console.log(action);
   switch (action.type) {
     case CREATE_CUSTOMER_REQUEST:
       return state.concat([action.data]);
@@ -47,30 +48,33 @@ export const customersReducer = (
 };
 
 export const deleteCustomerRequest = (customer: Customer, id: number | undefined) => {
-  return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
+  return async (dispatch: Dispatch<any>) => {
     await customersAPI.delete(customer);
     dispatch(deleteCustomerCreator(customer, id));
   };
 };
 export const createCustomerRequest = (customer: Customer) => {
-  return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
+  return async (dispatch: Dispatch<any>) => {
     await customersAPI.create(customer);
     dispatch(addCustomerCreator(customer));
     dispatch(setCustomerCreator(customer, customer.id));
   };
 };
 export const updateCustomerRequest = (customer: Customer, id: number | undefined) => {
-  return async (dispatch: Dispatch<{ type: string; customer: Customer }>) => {
+  return async (dispatch: Dispatch<any>) => {
     await customersAPI.update(customer);
     dispatch(setCustomerCreator(customer, id));
   };
 };
 export const loadCustomersRequest = () => {
-  const response = async (dispatch: Dispatch<{ type: string; customers: Customer[] }>) => {
-    const data: any = await customersAPI.index();
-    const customers = data || [];
-    console.log('loadCustomersRequest customers', customers);
-    dispatch(setCustomersCreator(customers));
+  return (dispatch: Dispatch<any>) => {
+    customersAPI
+      .index()
+      .then((data) => {
+        const customers = data || [];
+        console.log('loadCustomersRequest customers', customers);
+        dispatch(setCustomersCreator(customers));
+      })
+      .catch(console.error);
   };
-  return response;
 };
