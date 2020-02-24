@@ -1,47 +1,34 @@
 import { Customer } from 'MyModels';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal, useModal } from '../ButtonModal';
-import { AddCustomerForm, EditCustomerForm } from '../../containers/CustomerFormContainer';
-import { deleteCustomerRequest, loadCustomersRequest } from '../../features/customers/reducer';
+import { AddCustomerForm } from '../../containers/CustomerFormContainer';
 import { CustomersProps } from './types/CustomersProps';
-
-const CustomerRow = ({ customer, hideModal }: { customer: Customer; hideModal: () => void }) => {
-  const { id, name, address, phone } = customer;
-  const onDelete = () => {
-    deleteCustomerRequest(customer, id);
-  };
-
-  return (
-    <tr>
-      <td>{id}</td>
-      <td>{name}</td>
-      <td>{address}</td>
-      <td>{phone}</td>
-      <td>
-        <ButtonGroup>
-          <ButtonModal title="Edit Customer" buttonText="Edit" body={<EditCustomerForm customer={customer} hideModal={hideModal} />} />
-          <Button variant="outline-secondary" onClick={onDelete}>
-            Delete
-          </Button>
-        </ButtonGroup>
-      </td>
-    </tr>
-  );
-};
+import { CustomerRow } from './CustomerRow';
 
 const PureCustomers = (props: CustomersProps) => {
   document.title = 'Customers';
-  const { customers } = props;
-
+  console.log('CustomersProps', props);
+  const { customers, load } = props;
   const { hideModal } = useModal(true);
+  const [customersState, setCustomersState] = useState(customers);
+
+  useEffect(() => {
+    if (!customersState) {
+      load();
+      setCustomersState(customers);
+    }
+  }, [customers, customersState, load]);
+
+  // if (!customers) {
+  //   return <Loading />;
+  // }
 
   const newCustomer: Customer = { name: '', address: '', phone: '' };
 
   const onLoad = () => {
-    loadCustomersRequest();
+    load();
   };
 
   return (
@@ -64,9 +51,7 @@ const PureCustomers = (props: CustomersProps) => {
           </tr>
         </thead>
         <tbody>
-          {customers.map((customer) => (
-            <CustomerRow key={customer.id} customer={customer} hideModal={hideModal} />
-          ))}
+          {customersState && customersState.map((customer) => <CustomerRow key={customer.id} customer={customer} hideModal={hideModal} />)}
         </tbody>
       </Table>
     </>

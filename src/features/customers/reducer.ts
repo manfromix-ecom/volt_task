@@ -5,7 +5,6 @@ import merge from 'lodash/merge';
 import {
   CREATE_CUSTOMER_REQUEST,
   DELETE_CUSTOMER_REQUEST,
-  LOAD_CUSTOMERS_REQUEST,
   SET_CUSTOMER_REQUEST,
   SET_CUSTOMERS,
   UPDATE_CUSTOMER_REQUEST,
@@ -15,7 +14,11 @@ import { addCustomerCreator, deleteCustomerCreator, setCustomerCreator, setCusto
 
 const initialState: Customer[] = [];
 
-export const customersReducer = (state: Customer[] = initialState, action: { type: string; data: any; id: number | undefined }) => {
+export const customersReducer = (
+  state: Customer[] = initialState,
+  action: { type: string; data: any; id: number | undefined }
+): Customer[] => {
+  console.log(action);
   switch (action.type) {
     case CREATE_CUSTOMER_REQUEST:
       return state.concat([action.data]);
@@ -63,12 +66,11 @@ export const updateCustomerRequest = (customer: Customer, id: number | undefined
   };
 };
 export const loadCustomersRequest = () => {
-  console.log('loadCustomersRequest');
   const response = async (dispatch: Dispatch<{ type: string; customers: Customer[] }>) => {
-    console.log('loadCustomersRequest async');
-    const data = await customersAPI.index();
-    console.log('loadCustomersRequest data', data);
-    dispatch(setCustomersCreator(data));
+    const data: any = await customersAPI.index();
+    const customers = data || [];
+    console.log('loadCustomersRequest customers', customers);
+    dispatch(setCustomersCreator(customers));
   };
   return response;
 };

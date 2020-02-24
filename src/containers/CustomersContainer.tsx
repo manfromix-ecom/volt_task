@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { Customer } from 'MyModels';
 import { connect } from 'react-redux';
-import { loadCustomersRequest } from '../features/customers/reducer';
+import { Customer } from 'MyModels';
+import { deleteCustomerRequest, loadCustomersRequest } from '../features/customers/reducer';
 import { Customers } from '../components/customers/Customers';
-import { customersAPI } from '../api/customers-api';
 
-export const ContainerBeforeConnect = (props: any) => {
-  const { customers, load } = props;
-  const [customerCollection, setCustomerCollection] = useState<Customer[]>(customers);
+interface MapStateToPropsTypes {
+  customers: Customer[];
+}
 
-  useEffect(() => {
-    if (!customerCollection.length) {
-      load();
-    }
-    // customersAPI.index().then((collection) => setCustomerCollection(collection));
-  }, []);
-
-  return <Customers customers={customerCollection as Customer[]} />;
-};
+interface MapDispatchToPropsTypes {
+  load: () => void;
+  delete: (customer: Customer, id: number) => void;
+}
 
 const mapStateToProps = (state: any) => {
-  //console.log('mapStateToProps PROFILE')
+  console.log('mapStateToProps customers', state);
   return {
     customers: state.customers,
   };
 };
 
-// @ts-ignore
-export const CustomersContainer = connect(mapStateToProps, { load: loadCustomersRequest })(ContainerBeforeConnect);
+const mapDispatchToProps = () => {
+  return {
+    load: loadCustomersRequest,
+    delete: deleteCustomerRequest,
+  };
+};
+
+export const CustomersContainer = connect<MapStateToPropsTypes, MapDispatchToPropsTypes>(mapStateToProps, {
+  load: loadCustomersRequest,
+  delete: deleteCustomerRequest,
+})(Customers);

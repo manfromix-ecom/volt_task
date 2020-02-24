@@ -1,7 +1,7 @@
 import React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 
-const Loading = () => {
+export const Loading = () => {
   return (
     <div className="suspense_loading">
       <Spinner animation="border" role="status" variant="secondary">

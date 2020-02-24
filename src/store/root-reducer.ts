@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-
 import { customersReducer } from '../features/customers/reducer';
 import { productsReducer } from '../features/products/reducer';
 import { invoicesReducer } from '../features/invoices/reducer';
@@ -12,5 +11,3 @@ export const rootReducer = () =>
     invoices: invoicesReducer,
     invoiceItems: invoiceItemsReducer,
   });
-
-export default rootReducer;
