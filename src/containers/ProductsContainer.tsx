@@ -1,17 +1,27 @@
-import React from 'react';
-import { Product } from 'MyModels';
-import { productsAPI } from '../api/products-api';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+import { deleteProductRequest, loadProductsRequest } from '../features/products/reducer';
 import { Products } from '../components/products/Products';
+import { ProductDispatchProps, ProductsStateProps } from '../components/products/types/ProductsProps';
 
-export const ProductsContainer: React.FC = () => {
-  const [productCollection, setProductCollection] = React.useState<Product[]>([]);
-
-  React.useEffect(() => {
-    const loadProductCollection = () => {
-      productsAPI.index().then((collection) => setProductCollection(collection));
-    };
-    loadProductCollection();
-  }, []);
-
-  return <Products products={productCollection as Product[]} />;
+const mapStateToProps = (state: any): ProductsStateProps => {
+  return {
+    products: state.products,
+  };
 };
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  const combinedActions: ProductDispatchProps = Object.assign(
+    {},
+    {
+      loadProductsRequest,
+      deleteProductRequest,
+    }
+  );
+  return bindActionCreators(combinedActions as any, dispatch);
+};
+
+export const ProductsContainer = connect<ProductsStateProps, ProductDispatchProps, {}, any>(
+  mapStateToProps,
+  mapDispatchToProps as any
+)(Products);

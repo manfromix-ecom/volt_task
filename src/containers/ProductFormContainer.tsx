@@ -2,16 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ProductForm } from '../components/products/ProductForm';
 import { createProductRequest, updateProductRequest } from '../features/products/reducer';
-import { ProductContainerProps } from './types/ProductContainerProps';
+import { ProductFormContainerProps } from '../components/products/types/ProductsProps';
 
-const FormContainer = (props: ProductContainerProps) => {
+const FormContainer = (props: ProductFormContainerProps) => {
   const { product, setProduct, hideModal } = props;
 
   const onSubmit = (formData: any) => {
     const { name, price } = formData;
-    console.log('formData', formData, product);
     hideModal();
-    setProduct({ name, price, id: product.id }, product.id);
+    setProduct({ name, price, id: product.id });
   };
   return <ProductForm initialValues={product} onSubmit={onSubmit} />;
 };

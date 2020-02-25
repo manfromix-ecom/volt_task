@@ -1,43 +1,23 @@
 import { Product } from 'MyModels';
-import React from 'react';
+import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { ButtonModal, useModal } from '../ButtonModal';
-import { AddProductForm, EditProductForm } from '../../containers/ProductFormContainer';
-import { deleteProductRequest } from '../../features/products/reducer';
+import { ButtonModal, useModal } from '../common/ButtonModal';
+import { AddProductForm } from '../../containers/ProductFormContainer';
 import { ProductsProps } from './types/ProductsProps';
+import { ProductRow } from './ProductRow';
 
-const ProductRow = ({ product, hideModal }: { product: Product; hideModal: () => void }) => {
-  const { id, name, price } = product;
-  const onDelete = () => {
-    deleteProductRequest(product, id);
-  };
-  return (
-    <tr>
-      <td>{id}</td>
-      <td>{name}</td>
-      <td>{price}</td>
-      <td>
-        <ButtonGroup>
-          <ButtonModal title="Edit Product" buttonText="Edit" body={<EditProductForm product={product} hideModal={hideModal} />} />
-          <Button variant="outline-secondary" onClick={onDelete}>
-            Delete
-          </Button>
-        </ButtonGroup>
-      </td>
-    </tr>
-  );
-};
-
-const PureProducts = (props: ProductsProps) => {
+export const Products = (props: ProductsProps) => {
   document.title = 'Products';
-  const { products } = props;
-
+  console.log('ProductsProps', props);
+  const { products, loadProductsRequest } = props;
+  const [reloadEmpty, setReloadEmpty] = useState(false);
+  if (!reloadEmpty && !products.length) {
+    setReloadEmpty(true);
+    loadProductsRequest();
+  }
   const { hideModal } = useModal(true);
 
   const newProduct: Product = { name: '', price: '' };
-
   return (
     <>
       <h1>
@@ -53,14 +33,8 @@ const PureProducts = (props: ProductsProps) => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
-          {products.map((product) => (
-            <ProductRow key={product.id} product={product} hideModal={hideModal} />
-          ))}
-        </tbody>
+        <tbody>{products && products.map((product) => <ProductRow key={product.id} product={product} hideModal={hideModal} />)}</tbody>
       </Table>
     </>
   );
 };
-
-export const Products = React.memo(PureProducts);

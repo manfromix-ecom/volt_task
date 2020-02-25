@@ -2,8 +2,8 @@ import React from 'react';
 import { useFormik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { InvoiceItems } from './InvoiceItems';
 import { InvoiceFormProps } from './types/InvoicesProps';
+import { InvoiceItems } from './InvoiceItems';
 
 export const InvoiceForm = (props: InvoiceFormProps) => {
   const { onSubmit, initialValues } = props;
@@ -31,7 +31,7 @@ export const InvoiceForm = (props: InvoiceFormProps) => {
       </Button>
       <InvoiceItems />
       <h2>
-        Total:
+        <span>Total: </span>
         {String(formik.values.total)}
       </h2>
     </Form>

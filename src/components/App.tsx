@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { withSuspense } from '../hoc/withSuspense';
-import { Header } from './Header';
+import { Header } from './common/Header';
 import './App.scss';
 
 const Customers = React.lazy(() =>

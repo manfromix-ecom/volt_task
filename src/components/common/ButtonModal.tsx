@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-
-interface modalProps {
-  title?: string | null;
-  body?: JSX.Element | null;
-  buttonText?: string | null;
-}
+import { modalProps } from './types/ButtonModalProps';
 
 export const useModal = (initShow = false) => {
   const [show, setShow] = useState(initShow);

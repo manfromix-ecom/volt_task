@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { ButtonModal } from '../ButtonModal';
+import { ButtonModal } from '../common/ButtonModal';
 import { EditCustomerForm } from '../../containers/CustomerFormContainer';
 import { CustomerRowProps } from './types/CustomersProps';
 import { deleteCustomerRequest } from '../../features/customers/reducer';

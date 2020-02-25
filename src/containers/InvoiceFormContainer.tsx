@@ -2,16 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { InvoiceForm } from '../components/invoices/InvoiceForm';
 import { createInvoiceRequest, updateInvoiceRequest } from '../features/invoices/reducer';
-import { InvoiceContainerProps } from './types/InvoiceContainerProps';
+import { InvoiceFormContainerProps } from '../components/invoices/types/InvoicesProps';
 
-const FormContainer = (props: InvoiceContainerProps) => {
+const FormContainer = (props: InvoiceFormContainerProps) => {
   const { invoice, setInvoice, hideModal } = props;
 
   const onSubmit = (formData: any) => {
     const { customerId, discount, total } = formData;
-    console.log('formData', formData, invoice);
     hideModal();
-    setInvoice({ customerId, discount, total, id: invoice.id }, invoice.id);
+    setInvoice({ customerId, discount, total, id: invoice.id });
   };
   return <InvoiceForm initialValues={invoice} onSubmit={onSubmit} />;
 };
