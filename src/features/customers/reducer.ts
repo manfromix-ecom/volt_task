@@ -38,8 +38,7 @@ export const customersReducer = (state: Customer[] = initialState, action: { typ
         return customer;
       });
     case SET_CUSTOMERS:
-      console.log(SET_CUSTOMERS, action.data, state.concat(action.data));
-      return state.concat(action.data);
+      return action.data;
     default:
       return state;
   }
@@ -58,7 +57,7 @@ export const deleteCustomerRequest = (customer: Customer) => {
 export const createCustomerRequest = (customer: Customer) => {
   return async (dispatch: Dispatch<any>) => {
     const data: any = await customersAPI.create(customer);
-    if (data.id) customer.id = data.id;
+    if (data.data && data.data.id) customer.id = data.data.id;
     dispatch(addCustomerCreator(customer));
   };
 };

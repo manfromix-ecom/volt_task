@@ -1,5 +1,5 @@
 import { Customer } from 'MyModels';
-import React from 'react';
+import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { ButtonModal, useModal } from '../ButtonModal';
@@ -11,7 +11,11 @@ export const Customers = (props: CustomersProps) => {
   document.title = 'Customers';
   console.log('CustomersProps', props);
   const { customers, loadCustomersRequest } = props;
-  // if (!customers.length) loadCustomersRequest();
+  const [reloadEmpty, setReloadEmpty] = useState(false);
+  if (!reloadEmpty && !customers.length) {
+    setReloadEmpty(true);
+    loadCustomersRequest();
+  }
   const { hideModal } = useModal(true);
 
   const newCustomer: Customer = { name: '', address: '', phone: '' };
@@ -20,9 +24,9 @@ export const Customers = (props: CustomersProps) => {
       <h1>
         Customer List
         <ButtonModal title="Add Customer" body={<AddCustomerForm customer={newCustomer} hideModal={hideModal} />} />
-        <Button variant="outline-secondary" onClick={loadCustomersRequest}>
+        {/*<Button variant="outline-secondary" onClick={loadCustomersRequest}>
           Load
-        </Button>
+        </Button>*/}
       </h1>
       <Table hover responsive>
         <thead>

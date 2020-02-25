@@ -167,19 +167,19 @@ app.route('/api/customers')
 
 app.route('/api/customers/:customer_id')
   .get(function(req, res) {
-    Customer.findById(req.params.customer_id).then(function(customer) {
+    Customer.findByPk(req.params.customer_id).then(function(customer) {
       res.json(customer);
     });
   })
   .put(function(req, res) {
-    Customer.findById(req.params.customer_id).then(function(customer) {
+    Customer.findByPk(req.params.customer_id).then(function(customer) {
       customer.update(_.pick(req.body, ['name', 'address', 'phone'])).then(function(customer) {
         res.json(customer);
       });
     });
   })
   .delete(function(req, res) {
-    Customer.findById(req.params.customer_id).then(function(customer) {
+    Customer.findByPk(req.params.customer_id).then(function(customer) {
       customer.destroy().then(function(customer) {
         res.json(customer);
       });
@@ -203,19 +203,19 @@ app.route('/api/products')
 
 app.route('/api/products/:product_id')
   .get(function(req, res) {
-    Product.findById(req.params.product_id).then(function(product) {
+    Product.findByPk(req.params.product_id).then(function(product) {
       res.json(product);
     });
   })
   .put(function(req, res) {
-    Product.findById(req.params.product_id).then(function(product) {
+    Product.findByPk(req.params.product_id).then(function(product) {
       product.update(_.pick(req.body, ['name', 'price'])).then(function(product) {
         res.json(product);
       });
     });
   })
   .delete(function(req, res) {
-    Product.findById(req.params.product_id).then(function(product) {
+    Product.findByPk(req.params.product_id).then(function(product) {
       product.destroy().then(function(product) {
         res.json(product);
       });
@@ -240,19 +240,19 @@ app.route('/api/invoices')
 
 app.route('/api/invoices/:invoice_id')
   .get(function(req, res) {
-    Invoice.findById(req.params.invoice_id).then(function(invoice) {
+    Invoice.findByPk(req.params.invoice_id).then(function(invoice) {
       res.json(invoice);
     });
   })
   .put(function(req, res) {
-    Invoice.findById(req.params.invoice_id).then(function(invoice) {
+    Invoice.findByPk(req.params.invoice_id).then(function(invoice) {
       invoice.update(_.pick(req.body, ['customer_id', 'discount', 'total'])).then(function(invoice) {
         res.json(invoice);
       });
     });
   })
   .delete(function(req, res) {
-    Invoice.findById(req.params.invoice_id).then(function(invoice) {
+    Invoice.findByPk(req.params.invoice_id).then(function(invoice) {
       invoice.destroy().then(function(invoice) {
         res.json(invoice);
       });
@@ -278,19 +278,19 @@ app.route('/api/invoices/:invoice_id/items')
 
 app.route('/api/invoices/:invoice_id/items/:id')
   .get(function(req, res) {
-    InvoiceItem.findById(req.params.id).then(function(invoice_item) {
+    InvoiceItem.findByPk(req.params.id).then(function(invoice_item) {
       res.json(invoice_item);
     });
   })
   .put(function(req, res) {
-    InvoiceItem.findById(req.params.id).then(function(invoice_item) {
+    InvoiceItem.findByPk(req.params.id).then(function(invoice_item) {
       invoice_item.update(_.pick(req.body, ['product_id', 'quantity'])).then(function(invoice_item) {
         res.json(invoice_item);
       });
     });
   })
   .delete(function(req, res) {
-    InvoiceItem.findById(req.params.id).then(function(invoice_item) {
+    InvoiceItem.findByPk(req.params.id).then(function(invoice_item) {
       invoice_item.destroy().then(function(invoice_item) {
         res.json(invoice_item);
       });
