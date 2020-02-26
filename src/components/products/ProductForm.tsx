@@ -21,7 +21,7 @@ export const ProductForm = (props: ProductFormProps) => {
   return (
     <Form onSubmit={formik.handleSubmit}>
       <Form.Group controlId="name">
-        <input name="id" type="hidden" value={formik.values.id} />
+        <input name="id" type="hidden" value={formik.values.id || ''} />
         <Form.Label column={false}>Name</Form.Label>
         <Form.Control name="name" type="text" value={formik.values.name} onChange={formik.handleChange} />
       </Form.Group>

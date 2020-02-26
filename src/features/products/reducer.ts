@@ -1,12 +1,9 @@
-/* eslint no-console: off */
-
 import { Product } from 'MyModels';
 import { CREATE_PRODUCT_REQUEST, DELETE_PRODUCT_REQUEST, SET_PRODUCT_REQUEST, SET_PRODUCTS, UPDATE_PRODUCT_REQUEST } from './constants';
 
 const initialState: Product[] = [];
 
 export const productsReducer = (state: Product[] = initialState, action: { type: string; data: any }): Product[] => {
-  console.log(action);
   switch (action.type) {
     case CREATE_PRODUCT_REQUEST:
       return state.concat([action.data]);

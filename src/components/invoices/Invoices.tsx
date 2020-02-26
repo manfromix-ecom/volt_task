@@ -1,20 +1,19 @@
 import { Invoice } from 'MyModels';
-import React, { useState } from 'react';
+import React from 'react';
 import Table from 'react-bootstrap/Table';
-import { ButtonModal, useModal } from '../common/ButtonModal';
+import { ButtonModal } from '../common/ButtonModal';
 import { InvoiceFormContainer } from '../../containers/InvoiceFormContainer';
 import { InvoicesProps } from './types/InvoicesProps';
 import { InvoiceRowContainer } from '../../containers/InvoiceRowContainer';
+import { useInvoices } from '../../hooks/useInvoices';
+import { useCustomers } from '../../hooks/useCustomers';
+import { useModal } from '../../hooks/useModal';
 
 export const Invoices = (props: InvoicesProps) => {
   document.title = 'Invoices';
-  const { invoices, loadInvoicesRequest } = props;
-  console.log(invoices);
-  const [reloadEmpty, setReloadEmpty] = useState(false);
-  if (!reloadEmpty && !invoices.length) {
-    setReloadEmpty(true);
-    loadInvoicesRequest();
-  }
+  const { invoices, customers } = props;
+  useInvoices(invoices);
+  useCustomers(customers);
   const { hideModal } = useModal(true);
 
   const newInvoice: Invoice = { customerId: 0, discount: 0, total: 0 };

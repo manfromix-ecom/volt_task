@@ -1,19 +1,18 @@
 import { Customer } from 'MyModels';
-import React, { useState } from 'react';
+import React from 'react';
 import Table from 'react-bootstrap/Table';
-import { ButtonModal, useModal } from '../common/ButtonModal';
+import { ButtonModal } from '../common/ButtonModal';
 import { CustomerFormContainer } from '../../containers/CustomerFormContainer';
 import { CustomerRowContainer } from '../../containers/CustomerRowContainer';
 import { CustomersProps } from './types/CustomersProps';
+import { useCustomers } from '../../hooks/useCustomers';
+import { useModal } from '../../hooks/useModal';
 
 export const Customers = (props: CustomersProps) => {
   document.title = 'Customers';
-  const { customers, loadCustomersRequest } = props;
-  const [reloadEmpty, setReloadEmpty] = useState(false);
-  if (!reloadEmpty && !customers.length) {
-    setReloadEmpty(true);
-    loadCustomersRequest();
-  }
+  const { customers } = props;
+  useCustomers(customers);
+
   const { hideModal } = useModal(true);
 
   const newCustomer: Customer = { name: '', address: '', phone: '' };

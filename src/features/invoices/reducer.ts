@@ -1,5 +1,3 @@
-/* eslint no-console: off */
-
 import { Invoice } from 'MyModels';
 
 import { CREATE_INVOICE_REQUEST, DELETE_INVOICE_REQUEST, SET_INVOICE_REQUEST, SET_INVOICES, UPDATE_INVOICE_REQUEST } from './constants';
@@ -7,7 +5,6 @@ import { CREATE_INVOICE_REQUEST, DELETE_INVOICE_REQUEST, SET_INVOICE_REQUEST, SE
 const initialState: Invoice[] = [];
 
 export const invoicesReducer = (state: Invoice[] = initialState, action: { type: string; data: any }): Invoice[] => {
-  console.log(action);
   switch (action.type) {
     case CREATE_INVOICE_REQUEST:
       return state.concat([action.data]);

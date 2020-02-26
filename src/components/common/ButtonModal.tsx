@@ -1,18 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { modalProps } from './types/ButtonModalProps';
-
-export const useModal = (initShow = false) => {
-  const [show, setShow] = useState(initShow);
-  const showModal = () => setShow(true);
-  const hideModal = () => setShow(false);
-  return {
-    show,
-    showModal,
-    hideModal,
-  };
-};
+import { useModal } from '../../hooks/useModal';
 
 export const ButtonModal: React.FC<modalProps> = (props: modalProps) => {
   const { title, body, buttonText = 'Create' } = props;

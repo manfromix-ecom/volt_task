@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CustomersOptionsProps } from './types/CustomersOptionsProps';
+import { useCustomers } from '../../hooks/useCustomers';
 
 export const CustomerOptions = (props: CustomersOptionsProps) => {
-  const { customers, loadCustomersRequest } = props;
-  const [reloadEmpty, setReloadEmpty] = useState(false);
-  if (!reloadEmpty && !customers.length) {
-    setReloadEmpty(true);
-    loadCustomersRequest();
-  }
+  const { customers } = props;
+  useCustomers(customers);
 
   return (
     <>

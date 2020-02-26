@@ -1,19 +1,17 @@
 import { Product } from 'MyModels';
-import React, { useState } from 'react';
+import React from 'react';
 import Table from 'react-bootstrap/Table';
-import { ButtonModal, useModal } from '../common/ButtonModal';
+import { ButtonModal } from '../common/ButtonModal';
 import { ProductFormContainer } from '../../containers/ProductFormContainer';
 import { ProductsProps } from './types/ProductsProps';
 import { ProductRowContainer } from '../../containers/ProductRowContainer';
+import { useProducts } from '../../hooks/useProducts';
+import { useModal } from '../../hooks/useModal';
 
 export const Products = (props: ProductsProps) => {
   document.title = 'Products';
-  const { products, loadProductsRequest } = props;
-  const [reloadEmpty, setReloadEmpty] = useState(false);
-  if (!reloadEmpty && !products.length) {
-    setReloadEmpty(true);
-    loadProductsRequest();
-  }
+  const { products } = props;
+  useProducts(products);
   const { hideModal } = useModal(true);
 
   const newProduct: Product = { name: '', price: '' };

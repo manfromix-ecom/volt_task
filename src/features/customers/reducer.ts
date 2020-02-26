@@ -1,5 +1,3 @@
-/* eslint no-console: off */
-
 import { Customer } from 'MyModels';
 
 import {
@@ -13,7 +11,6 @@ import {
 const initialState: Customer[] = [];
 
 export const customersReducer = (state: Customer[] = initialState, action: { type: string; data: any }): Customer[] => {
-  console.log(action);
   switch (action.type) {
     case CREATE_CUSTOMER_REQUEST:
       return state.concat([action.data]);

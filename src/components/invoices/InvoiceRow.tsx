@@ -6,8 +6,8 @@ import { InvoiceFormContainer } from '../../containers/InvoiceFormContainer';
 import { InvoiceRowProps } from './types/InvoiceRowProps';
 
 export const InvoiceRow = (props: InvoiceRowProps) => {
-  const { invoice, hideModal, deleteInvoiceRequest } = props;
-  const { id, customerId, discount, total } = invoice;
+  const { invoice, customer, hideModal, deleteInvoiceRequest } = props;
+  const { id, discount, total } = invoice;
   const onDelete = () => {
     deleteInvoiceRequest(invoice);
   };
@@ -15,7 +15,7 @@ export const InvoiceRow = (props: InvoiceRowProps) => {
   return (
     <tr>
       <td>{id}</td>
-      <td>{customerId}</td>
+      <td>{customer.name}</td>
       <td>{discount}</td>
       <td>{total}</td>
       <td>

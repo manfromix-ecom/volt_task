@@ -22,7 +22,7 @@ export const InvoiceForm = (props: InvoiceFormProps) => {
 
   return (
     <Form onSubmit={formik.handleSubmit}>
-      <input type="hidden" value={formik.values.id} />
+      <input type="hidden" value={formik.values.id || ''} />
       <Form.Group controlId="discount">
         <Form.Label column={false}>Discount (%)</Form.Label>
         <Form.Control name="discount" type="text" value={String(formik.values.discount)} onChange={formik.handleChange} />

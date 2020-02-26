@@ -6,6 +6,4 @@ export interface CustomersOptionsStateProps {
   customers: Customer[];
 }
 
-export interface CustomersOptionsDispatchProps {
-  loadCustomersRequest: () => void;
-}
+export interface CustomersOptionsDispatchProps {}

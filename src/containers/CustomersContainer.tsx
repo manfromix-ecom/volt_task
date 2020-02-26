@@ -1,28 +1,13 @@
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import { deleteCustomerRequest, loadCustomersRequest } from '../features/customers/actions';
+import Types from 'MyTypes';
 import { Customers } from '../components/customers/Customers';
 import { CustomerDispatchProps, CustomersStateProps } from '../components/customers/types/CustomersProps';
 import { getCustomers } from '../features/customers/selectors';
 
-const mapStateToProps = (state: any): CustomersStateProps => {
+const mapStateToProps = (state: Types.RootState): CustomersStateProps => {
   return {
     customers: getCustomers(state),
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  const combinedActions: CustomerDispatchProps = Object.assign(
-    {},
-    {
-      loadCustomersRequest,
-      deleteCustomerRequest,
-    }
-  );
-  return bindActionCreators(combinedActions as any, dispatch);
-};
-
-export const CustomersContainer = connect<CustomersStateProps, CustomerDispatchProps, {}, any>(
-  mapStateToProps,
-  mapDispatchToProps as any
-)(Customers);
+export const CustomersContainer = connect<CustomersStateProps, CustomerDispatchProps>(mapStateToProps, {})(Customers);
