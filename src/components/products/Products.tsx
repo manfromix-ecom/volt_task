@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 import { ButtonModal, useModal } from '../common/ButtonModal';
 import { ProductFormContainer } from '../../containers/ProductFormContainer';
 import { ProductsProps } from './types/ProductsProps';
-import { ProductRow } from './ProductRow';
+import { ProductRowContainer } from '../../containers/ProductRowContainer';
 
 export const Products = (props: ProductsProps) => {
   document.title = 'Products';
@@ -32,7 +32,9 @@ export const Products = (props: ProductsProps) => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>{products && products.map((product) => <ProductRow key={product.id} product={product} hideModal={hideModal} />)}</tbody>
+        <tbody>
+          {products && products.map((product) => <ProductRowContainer key={product.id} product={product} hideModal={hideModal} />)}
+        </tbody>
       </Table>
     </>
   );

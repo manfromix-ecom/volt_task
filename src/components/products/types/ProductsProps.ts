@@ -5,6 +5,5 @@ export interface ProductsStateProps {
 }
 export interface ProductDispatchProps {
   loadProductsRequest: () => void;
-  deleteProductRequest: (product: Product) => void;
 }
 export interface ProductsProps extends ProductsStateProps, ProductDispatchProps {}

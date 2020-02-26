@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { ButtonModal, useModal } from '../common/ButtonModal';
 import { CustomerFormContainer } from '../../containers/CustomerFormContainer';
+import { CustomerRowContainer } from '../../containers/CustomerRowContainer';
 import { CustomersProps } from './types/CustomersProps';
-import { CustomerRow } from './CustomerRow';
 
 export const Customers = (props: CustomersProps) => {
   document.title = 'Customers';
@@ -34,7 +34,7 @@ export const Customers = (props: CustomersProps) => {
           </tr>
         </thead>
         <tbody>
-          {customers && customers.map((customer) => <CustomerRow key={customer.id} customer={customer} hideModal={hideModal} />)}
+          {customers && customers.map((customer) => <CustomerRowContainer key={customer.id} customer={customer} hideModal={hideModal} />)}
         </tbody>
       </Table>
     </>

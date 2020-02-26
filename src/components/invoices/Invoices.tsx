@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 import { ButtonModal, useModal } from '../common/ButtonModal';
 import { InvoiceFormContainer } from '../../containers/InvoiceFormContainer';
 import { InvoicesProps } from './types/InvoicesProps';
-import { InvoiceRow } from './InvoiceRow';
+import { InvoiceRowContainer } from '../../containers/InvoiceRowContainer';
 
 export const Invoices = (props: InvoicesProps) => {
   document.title = 'Invoices';
@@ -34,7 +34,9 @@ export const Invoices = (props: InvoicesProps) => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>{invoices && invoices.map((invoice) => <InvoiceRow key={invoice.id} invoice={invoice} hideModal={hideModal} />)}</tbody>
+        <tbody>
+          {invoices && invoices.map((invoice) => <InvoiceRowContainer key={invoice.id} invoice={invoice} hideModal={hideModal} />)}
+        </tbody>
       </Table>
     </>
   );

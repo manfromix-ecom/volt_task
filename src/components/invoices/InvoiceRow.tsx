@@ -4,10 +4,9 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal } from '../common/ButtonModal';
 import { InvoiceFormContainer } from '../../containers/InvoiceFormContainer';
 import { InvoiceRowProps } from './types/InvoiceRowProps';
-import { deleteInvoiceRequest } from '../../features/invoices/actions';
 
 export const InvoiceRow = (props: InvoiceRowProps) => {
-  const { invoice, hideModal } = props;
+  const { invoice, hideModal, deleteInvoiceRequest } = props;
   const { id, customerId, discount, total } = invoice;
   const onDelete = () => {
     deleteInvoiceRequest(invoice);

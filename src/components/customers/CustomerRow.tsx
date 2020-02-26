@@ -4,10 +4,9 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal } from '../common/ButtonModal';
 import { CustomerFormContainer } from '../../containers/CustomerFormContainer';
 import { CustomerRowProps } from './types/CustomerRowProps';
-import { deleteCustomerRequest } from '../../features/customers/actions';
 
 export const CustomerRow = (props: CustomerRowProps) => {
-  const { customer, hideModal } = props;
+  const { customer, hideModal, deleteCustomerRequest } = props;
   const { id, name, address, phone } = customer;
   const onDelete = () => {
     deleteCustomerRequest(customer);

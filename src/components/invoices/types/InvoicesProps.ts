@@ -5,6 +5,5 @@ export interface InvoicesStateProps {
 }
 export interface InvoiceDispatchProps {
   loadInvoicesRequest: () => void;
-  deleteInvoiceRequest: (invoice: Invoice) => void;
 }
 export interface InvoicesProps extends InvoicesStateProps, InvoiceDispatchProps {}

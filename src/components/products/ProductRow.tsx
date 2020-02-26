@@ -4,10 +4,9 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal } from '../common/ButtonModal';
 import { ProductFormContainer } from '../../containers/ProductFormContainer';
 import { ProductRowProps } from './types/ProductRowProps';
-import { deleteProductRequest } from '../../features/products/actions';
 
 export const ProductRow = (props: ProductRowProps) => {
-  const { product, hideModal } = props;
+  const { product, hideModal, deleteProductRequest } = props;
   const { id, name, price } = product;
   const onDelete = () => {
     deleteProductRequest(product);
