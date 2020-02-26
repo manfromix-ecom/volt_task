@@ -8,8 +8,8 @@ import { InvoiceRow } from './InvoiceRow';
 
 export const Invoices = (props: InvoicesProps) => {
   document.title = 'Invoices';
-  console.log('InvoicesProps', props);
   const { invoices, loadInvoicesRequest } = props;
+  console.log(invoices);
   const [reloadEmpty, setReloadEmpty] = useState(false);
   if (!reloadEmpty && !invoices.length) {
     setReloadEmpty(true);
@@ -29,7 +29,7 @@ export const Invoices = (props: InvoicesProps) => {
           <tr>
             <th>#</th>
             <th>Customer</th>
-            <th>Discount</th>
+            <th>Discount (%)</th>
             <th>Total</th>
             <th>Actions</th>
           </tr>

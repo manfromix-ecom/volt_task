@@ -8,7 +8,6 @@ import { CustomerRow } from './CustomerRow';
 
 export const Customers = (props: CustomersProps) => {
   document.title = 'Customers';
-  console.log('CustomersProps', props);
   const { customers, loadCustomersRequest } = props;
   const [reloadEmpty, setReloadEmpty] = useState(false);
   if (!reloadEmpty && !customers.length) {

@@ -8,7 +8,6 @@ import { ProductRow } from './ProductRow';
 
 export const Products = (props: ProductsProps) => {
   document.title = 'Products';
-  console.log('ProductsProps', props);
   const { products, loadProductsRequest } = props;
   const [reloadEmpty, setReloadEmpty] = useState(false);
   if (!reloadEmpty && !products.length) {

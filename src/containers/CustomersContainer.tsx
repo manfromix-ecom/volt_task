@@ -3,10 +3,11 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { deleteCustomerRequest, loadCustomersRequest } from '../features/customers/reducer';
 import { Customers } from '../components/customers/Customers';
 import { CustomerDispatchProps, CustomersStateProps } from '../components/customers/types/CustomersProps';
+import { getCustomers } from '../features/customers/selectors';
 
 const mapStateToProps = (state: any): CustomersStateProps => {
   return {
-    customers: state.customers,
+    customers: getCustomers(state),
   };
 };
 

@@ -3,10 +3,11 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { deleteInvoiceRequest, loadInvoicesRequest } from '../features/invoices/reducer';
 import { Invoices } from '../components/invoices/Invoices';
 import { InvoiceDispatchProps, InvoicesStateProps } from '../components/invoices/types/InvoicesProps';
+import { getInvoices } from '../features/invoices/selector';
 
 const mapStateToProps = (state: any): InvoicesStateProps => {
   return {
-    invoices: state.invoices,
+    invoices: getInvoices(state),
   };
 };
 

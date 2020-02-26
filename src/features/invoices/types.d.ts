@@ -5,5 +5,6 @@ declare module 'MyModels' {
     discount: number;
     total: number;
     editing?: boolean;
+    customer?: Customer;
   };
 }

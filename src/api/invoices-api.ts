@@ -5,7 +5,7 @@ import { apiClient } from './api-client';
 const mapToModel = ({ data }: AxiosResponse<any[]>): Invoice[] =>
   data.map((invoice) => ({
     id: invoice.id,
-    customerId: invoice.customerId,
+    customerId: invoice.customer_id,
     discount: invoice.discount,
     total: invoice.total,
   }));
