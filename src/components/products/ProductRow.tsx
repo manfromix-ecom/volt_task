@@ -2,9 +2,9 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal } from '../common/ButtonModal';
-import { EditProductForm } from '../../containers/ProductFormContainer';
-import { ProductRowProps } from './types/ProductsProps';
-import { deleteProductRequest } from '../../features/products/reducer';
+import { ProductFormContainer } from '../../containers/ProductFormContainer';
+import { ProductRowProps } from './types/ProductRowProps';
+import { deleteProductRequest } from '../../features/products/actions';
 
 export const ProductRow = (props: ProductRowProps) => {
   const { product, hideModal } = props;
@@ -20,7 +20,11 @@ export const ProductRow = (props: ProductRowProps) => {
       <td>{price}</td>
       <td>
         <ButtonGroup>
-          <ButtonModal title="Edit Product" buttonText="Edit" body={<EditProductForm product={product} hideModal={hideModal} />} />
+          <ButtonModal
+            title="Edit Product"
+            buttonText="Edit"
+            body={<ProductFormContainer initialValues={product} hideModal={hideModal} />}
+          />
           <Button variant="outline-secondary" onClick={onDelete}>
             Delete
           </Button>

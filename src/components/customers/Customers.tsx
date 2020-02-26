@@ -2,7 +2,7 @@ import { Customer } from 'MyModels';
 import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { ButtonModal, useModal } from '../common/ButtonModal';
-import { AddCustomerForm } from '../../containers/CustomerFormContainer';
+import { CustomerFormContainer } from '../../containers/CustomerFormContainer';
 import { CustomersProps } from './types/CustomersProps';
 import { CustomerRow } from './CustomerRow';
 
@@ -21,7 +21,7 @@ export const Customers = (props: CustomersProps) => {
     <>
       <h1>
         Customer List
-        <ButtonModal title="Add Customer" body={<AddCustomerForm customer={newCustomer} hideModal={hideModal} />} />
+        <ButtonModal title="Add Customer" body={<CustomerFormContainer initialValues={newCustomer} hideModal={hideModal} />} />
       </h1>
       <Table hover responsive>
         <thead>

@@ -2,10 +2,16 @@ import React from 'react';
 import { useFormik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { CustomerFormProps } from './types/CustomersProps';
+import { Customer } from 'MyModels';
+import { CustomerFormProps } from './types/CustomerFormProps';
 
 export const CustomerForm = (props: CustomerFormProps) => {
-  const { onSubmit, initialValues } = props;
+  const { initialValues, hideModal, setCustomer } = props;
+
+  const onSubmit = (customer: Customer) => {
+    hideModal();
+    setCustomer(customer);
+  };
 
   const formik = useFormik({
     initialValues,
@@ -15,6 +21,7 @@ export const CustomerForm = (props: CustomerFormProps) => {
   return (
     <Form onSubmit={formik.handleSubmit}>
       <Form.Group controlId="name">
+        <input name="id" type="hidden" value={formik.values.id} />
         <Form.Label column={false}>Name</Form.Label>
         <Form.Control name="name" type="text" value={formik.values.name} onChange={formik.handleChange} />
       </Form.Group>

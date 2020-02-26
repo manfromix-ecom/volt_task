@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { deleteProductRequest, loadProductsRequest } from '../features/products/reducer';
+import { deleteProductRequest, loadProductsRequest } from '../features/products/actions';
 import { Products } from '../components/products/Products';
 import { ProductDispatchProps, ProductsStateProps } from '../components/products/types/ProductsProps';
 

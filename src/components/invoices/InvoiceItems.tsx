@@ -2,7 +2,7 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import { fakeState } from '../../store/fakeState';
-import { invoiceItemsProps } from './types/invoiceItemsProps';
+import { invoiceItemsProps } from './types/InvoiceItemsProps';
 
 const invoiceItems: Array<invoiceItemsProps> = fakeState.invoice_items;
 const invoiceItemsRows: Array<JSX.Element | null> = invoiceItems.map((i) => {

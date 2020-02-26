@@ -1,17 +1,7 @@
 /* eslint no-console: off */
 
 import { Product } from 'MyModels';
-import { Dispatch } from 'redux';
-
-import {
-  CREATE_PRODUCT_REQUEST,
-  DELETE_PRODUCT_REQUEST,
-  SET_PRODUCT_REQUEST,
-  SET_PRODUCTS,
-  UPDATE_PRODUCT_REQUEST,
-} from './constants';
-import { productsAPI } from '../../api/products-api';
-import { addProductCreator, deleteProductCreator, setProductCreator, setProductsCreator } from './actions';
+import { CREATE_PRODUCT_REQUEST, DELETE_PRODUCT_REQUEST, SET_PRODUCT_REQUEST, SET_PRODUCTS, UPDATE_PRODUCT_REQUEST } from './constants';
 
 const initialState: Product[] = [];
 
@@ -41,40 +31,4 @@ export const productsReducer = (state: Product[] = initialState, action: { type:
     default:
       return state;
   }
-};
-
-export const deleteProductRequest = (product: Product) => {
-  console.log('deleteProductRequest');
-  return (dispatch: Dispatch<any>) => {
-    console.log('deleteProductRequest product', product);
-    productsAPI
-      .delete(product)
-      .then(() => dispatch(deleteProductCreator(product)))
-      .catch(console.error);
-  };
-};
-export const createProductRequest = (product: Product) => {
-  return async (dispatch: Dispatch<any>) => {
-    const data: any = await productsAPI.create(product);
-    if (data.data && data.data.id) product.id = data.data.id;
-    dispatch(addProductCreator(product));
-  };
-};
-export const updateProductRequest = (product: Product) => {
-  return async (dispatch: Dispatch<any>) => {
-    await productsAPI.update(product);
-    dispatch(setProductCreator(product));
-  };
-};
-export const loadProductsRequest = () => {
-  return (dispatch: Dispatch<any>) => {
-    productsAPI
-      .index()
-      .then((data) => {
-        const products = data || [];
-        console.log('loadProductsRequest products', products);
-        dispatch(setProductsCreator(products));
-      })
-      .catch(console.error);
-  };
 };

@@ -2,7 +2,7 @@ import { Invoice } from 'MyModels';
 import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { ButtonModal, useModal } from '../common/ButtonModal';
-import { AddInvoiceForm } from '../../containers/InvoiceFormContainer';
+import { InvoiceFormContainer } from '../../containers/InvoiceFormContainer';
 import { InvoicesProps } from './types/InvoicesProps';
 import { InvoiceRow } from './InvoiceRow';
 
@@ -22,7 +22,7 @@ export const Invoices = (props: InvoicesProps) => {
     <>
       <h1>
         Invoice List
-        <ButtonModal title="Add Invoice" body={<AddInvoiceForm invoice={newInvoice} hideModal={hideModal} />} />
+        <ButtonModal title="Add Invoice" body={<InvoiceFormContainer initialValues={newInvoice} hideModal={hideModal} />} />
       </h1>
       <Table hover responsive>
         <thead>

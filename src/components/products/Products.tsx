@@ -2,7 +2,7 @@ import { Product } from 'MyModels';
 import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { ButtonModal, useModal } from '../common/ButtonModal';
-import { AddProductForm } from '../../containers/ProductFormContainer';
+import { ProductFormContainer } from '../../containers/ProductFormContainer';
 import { ProductsProps } from './types/ProductsProps';
 import { ProductRow } from './ProductRow';
 
@@ -21,7 +21,7 @@ export const Products = (props: ProductsProps) => {
     <>
       <h1>
         Product List
-        <ButtonModal title="Add Product" body={<AddProductForm product={newProduct} hideModal={hideModal} />} />
+        <ButtonModal title="Add Product" body={<ProductFormContainer initialValues={newProduct} hideModal={hideModal} />} />
       </h1>
       <Table hover responsive>
         <thead>

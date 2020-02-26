@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { deleteInvoiceRequest, loadInvoicesRequest } from '../features/invoices/reducer';
+import { deleteInvoiceRequest, loadInvoicesRequest } from '../features/invoices/actions';
 import { Invoices } from '../components/invoices/Invoices';
 import { InvoiceDispatchProps, InvoicesStateProps } from '../components/invoices/types/InvoicesProps';
 import { getInvoices } from '../features/invoices/selector';
