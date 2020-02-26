@@ -14,9 +14,13 @@ export interface InvoiceDispatchProps {
 }
 export interface InvoicesProps extends InvoicesStateProps, InvoiceDispatchProps {}
 
+export interface InvoiceFormStateProps {
+  customers: Customer[];
+}
+
 export interface InvoiceFormDispatchProps {
-  loadInvoicesRequest: () => void;
-  deleteInvoiceRequest: (invoice: Invoice) => void;
+  loadCustomersRequest: () => void;
+  setInvoice: (invoice: Invoice) => void;
 }
 
 export interface InvoiceFormProps {
@@ -26,9 +30,7 @@ export interface InvoiceFormProps {
   loadCustomersRequest: () => void;
 }
 
-export interface InvoiceFormContainerProps {
+export interface InvoiceFormContainerProps extends InvoiceFormStateProps, InvoiceFormDispatchProps {
   invoice: Invoice;
-  setInvoice: (invoice: Invoice) => void;
   hideModal: () => void;
-  customers: Customer[];
 }
