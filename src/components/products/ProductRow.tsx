@@ -6,7 +6,7 @@ import { ProductFormContainer } from '../../containers/ProductFormContainer';
 import { ProductRowProps } from './types/ProductRowProps';
 
 export const ProductRow = (props: ProductRowProps) => {
-  const { product, hideModal, deleteProductRequest } = props;
+  const { product, deleteProductRequest } = props;
   const { id, name, price } = product;
   const onDelete = () => {
     deleteProductRequest(product);
@@ -22,7 +22,7 @@ export const ProductRow = (props: ProductRowProps) => {
           <ButtonModal
             title="Edit Product"
             buttonText="Edit"
-            body={<ProductFormContainer initialValues={product} hideModal={hideModal} />}
+            body={<ProductFormContainer initialValues={product} />}
           />
           <Button variant="outline-secondary" onClick={onDelete}>
             Delete

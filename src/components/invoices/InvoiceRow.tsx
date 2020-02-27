@@ -6,7 +6,7 @@ import { InvoiceFormContainer } from '../../containers/InvoiceFormContainer';
 import { InvoiceRowProps } from './types/InvoiceRowProps';
 
 export const InvoiceRow = (props: InvoiceRowProps) => {
-  const { invoice, customer, hideModal, deleteInvoiceRequest } = props;
+  const { invoice, customer, deleteInvoiceRequest } = props;
   const { id, discount, total } = invoice;
   const onDelete = () => {
     deleteInvoiceRequest(invoice);
@@ -23,7 +23,7 @@ export const InvoiceRow = (props: InvoiceRowProps) => {
           <ButtonModal
             title="Edit Invoice"
             buttonText="Edit"
-            body={<InvoiceFormContainer initialValues={invoice} hideModal={hideModal} />}
+            body={<InvoiceFormContainer initialValues={invoice} />}
           />
           <Button variant="outline-secondary" onClick={onDelete}>
             Delete

@@ -13,14 +13,12 @@ export const Customers = (props: CustomersProps) => {
   const { customers } = props;
   useCustomers(customers);
 
-  const { hideModal } = useModal(true);
-
   const newCustomer: Customer = { name: '', address: '', phone: '' };
   return (
     <>
       <h1>
         Customer List
-        <ButtonModal title="Add Customer" body={<CustomerFormContainer initialValues={newCustomer} hideModal={hideModal} />} />
+        <ButtonModal title="Add Customer" body={<CustomerFormContainer initialValues={newCustomer} />} />
       </h1>
       <Table hover responsive>
         <thead>
@@ -33,7 +31,7 @@ export const Customers = (props: CustomersProps) => {
           </tr>
         </thead>
         <tbody>
-          {customers && customers.map((customer) => <CustomerRowContainer key={customer.id} customer={customer} hideModal={hideModal} />)}
+          {customers && customers.map((customer) => <CustomerRowContainer key={customer.id} customer={customer} />)}
         </tbody>
       </Table>
     </>

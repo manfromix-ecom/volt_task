@@ -4,9 +4,10 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Product } from 'MyModels';
 import { ProductFormProps } from './types/ProductFormProps';
+import { hideModal } from '../../utils/hideModal';
 
 export const ProductForm = (props: ProductFormProps) => {
-  const { initialValues, hideModal, setProduct } = props;
+  const { initialValues, setProduct } = props;
 
   const onSubmit = (product: Product) => {
     hideModal();

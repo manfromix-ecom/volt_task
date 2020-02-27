@@ -6,7 +6,7 @@ import { CustomerFormContainer } from '../../containers/CustomerFormContainer';
 import { CustomerRowProps } from './types/CustomerRowProps';
 
 export const CustomerRow = (props: CustomerRowProps) => {
-  const { customer, hideModal, deleteCustomerRequest } = props;
+  const { customer, deleteCustomerRequest } = props;
   const { id, name, address, phone } = customer;
   const onDelete = () => {
     deleteCustomerRequest(customer);
@@ -23,7 +23,7 @@ export const CustomerRow = (props: CustomerRowProps) => {
           <ButtonModal
             title="Edit Customer"
             buttonText="Edit"
-            body={<CustomerFormContainer initialValues={customer} hideModal={hideModal} />}
+            body={<CustomerFormContainer initialValues={customer} />}
           />
           <Button variant="outline-secondary" onClick={onDelete}>
             Delete

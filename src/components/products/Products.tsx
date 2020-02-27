@@ -12,14 +12,13 @@ export const Products = (props: ProductsProps) => {
   document.title = 'Products';
   const { products } = props;
   useProducts(products);
-  const { hideModal } = useModal(true);
 
   const newProduct: Product = { name: '', price: '' };
   return (
     <>
       <h1>
         Product List
-        <ButtonModal title="Add Product" body={<ProductFormContainer initialValues={newProduct} hideModal={hideModal} />} />
+        <ButtonModal title="Add Product" body={<ProductFormContainer initialValues={newProduct} />} />
       </h1>
       <Table hover responsive>
         <thead>
@@ -31,7 +30,7 @@ export const Products = (props: ProductsProps) => {
           </tr>
         </thead>
         <tbody>
-          {products && products.map((product) => <ProductRowContainer key={product.id} product={product} hideModal={hideModal} />)}
+          {products && products.map((product) => <ProductRowContainer key={product.id} product={product} />)}
         </tbody>
       </Table>
     </>

@@ -8,5 +8,4 @@ export interface InvoiceFormDispatchProps {
 
 export interface InvoiceFormProps extends InvoiceFormDispatchProps, InvoiceFormStateProps {
   initialValues: Invoice;
-  hideModal: () => void;
 }

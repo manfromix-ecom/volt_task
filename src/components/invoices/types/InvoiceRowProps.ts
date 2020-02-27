@@ -6,9 +6,7 @@ export interface InvoiceRowProps extends InvoiceRowStateProps, InvoiceRowOwnProp
 
 export interface InvoiceRowOwnProps {
   invoice: Invoice;
-  hideModal: () => void;
-}
-
-export interface InvoiceRowStateProps {
   customer: Customer;
 }
+
+export interface InvoiceRowStateProps {}
