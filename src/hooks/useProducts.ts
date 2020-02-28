@@ -1,13 +1,10 @@
-import { useState } from 'react';
-import { Product } from 'MyModels';
+import { useEffect } from 'react';
 import { useReduxDispatch } from './useReduxDispatch';
-import { loadProductsRequest } from '../features/products/actions';
+import { loadProductsRequest } from '../store/products/actions';
 
-export const useProducts = (products: Product[]) => {
-  const [reloadEmpty, setReloadEmpty] = useState(false);
+export const useProducts = () => {
   const dispatch = useReduxDispatch();
-  if (!reloadEmpty && !products.length) {
-    setReloadEmpty(true);
+  useEffect(() => {
     dispatch(loadProductsRequest());
-  }
+  }, []);
 };

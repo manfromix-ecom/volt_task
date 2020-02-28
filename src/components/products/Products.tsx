@@ -6,12 +6,11 @@ import { ProductFormContainer } from '../../containers/ProductFormContainer';
 import { ProductsProps } from './types/ProductsProps';
 import { ProductRowContainer } from '../../containers/ProductRowContainer';
 import { useProducts } from '../../hooks/useProducts';
-import { useModal } from '../../hooks/useModal';
 
 export const Products = (props: ProductsProps) => {
   document.title = 'Products';
+  useProducts();
   const { products } = props;
-  useProducts(products);
 
   const newProduct: Product = { name: '', price: '' };
   return (
@@ -29,9 +28,7 @@ export const Products = (props: ProductsProps) => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
-          {products && products.map((product) => <ProductRowContainer key={product.id} product={product} />)}
-        </tbody>
+        <tbody>{products && products.map((product) => <ProductRowContainer key={product.id} product={product} />)}</tbody>
       </Table>
     </>
   );

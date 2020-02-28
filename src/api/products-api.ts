@@ -29,13 +29,9 @@ export const productsAPI = {
   },
   delete(product: Product) {
     const { id } = product;
-    return apiClient
-      .delete(`products/${id}`, {})
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    return apiClient.delete(`products/${id}`, {}).catch((error) => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    });
   },
 };

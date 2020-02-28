@@ -1,6 +1,6 @@
-import * as customersActions from '../features/customers/actions';
-import * as productsActions from '../features/products/actions';
-import * as invoicesActions from '../features/invoices/actions';
+import * as customersActions from './customers/actions';
+import * as productsActions from './products/actions';
+import * as invoicesActions from './invoices/actions';
 
 export default {
   customers: customersActions,

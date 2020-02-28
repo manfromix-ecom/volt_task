@@ -15,10 +15,10 @@ export const customersAPI = {
     return apiClient
       .get('customers/')
       .then((response) => {
-        console.log(response);
         return mapToModel(response);
       })
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.log(error);
         return [] as Customer[];
       });
@@ -37,14 +37,9 @@ export const customersAPI = {
   },
   delete(customer: Customer) {
     const { id } = customer;
-    console.log('customersAPI.delete', customer);
-    return apiClient
-      .delete(`customers/${id}`, {})
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    return apiClient.delete(`customers/${id}`, {}).catch((error) => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    });
   },
 };

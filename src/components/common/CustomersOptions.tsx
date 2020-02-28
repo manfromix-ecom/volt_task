@@ -3,8 +3,8 @@ import { CustomersOptionsProps } from './types/CustomersOptionsProps';
 import { useCustomers } from '../../hooks/useCustomers';
 
 export const CustomerOptions = (props: CustomersOptionsProps) => {
+  useCustomers();
   const { customers } = props;
-  useCustomers(customers);
 
   return (
     <>

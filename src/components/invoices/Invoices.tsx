@@ -7,13 +7,12 @@ import { InvoicesProps } from './types/InvoicesProps';
 import { InvoiceRowContainer } from '../../containers/InvoiceRowContainer';
 import { useInvoices } from '../../hooks/useInvoices';
 import { useCustomers } from '../../hooks/useCustomers';
-import { useModal } from '../../hooks/useModal';
 
 export const Invoices = (props: InvoicesProps) => {
   document.title = 'Invoices';
+  useInvoices();
+  useCustomers();
   const { invoices, customers } = props;
-  useInvoices(invoices);
-  useCustomers(customers);
 
   const newInvoice: Invoice = { customerId: 0, discount: 0, total: 0 };
   return (
@@ -35,7 +34,7 @@ export const Invoices = (props: InvoicesProps) => {
         <tbody>
           {invoices &&
             invoices.map((invoice) => {
-              const customersFiltered = customers.filter((current: Customer) => current.id == invoice.customerId);
+              const customersFiltered = customers.filter((current: Customer) => current.id === Number(invoice.customerId));
               const customer = customersFiltered.length ? customersFiltered[0] : ({} as Customer);
               return <InvoiceRowContainer key={invoice.id} invoice={invoice} customer={customer} />;
             })}

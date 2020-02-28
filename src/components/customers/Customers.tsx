@@ -6,12 +6,11 @@ import { CustomerFormContainer } from '../../containers/CustomerFormContainer';
 import { CustomerRowContainer } from '../../containers/CustomerRowContainer';
 import { CustomersProps } from './types/CustomersProps';
 import { useCustomers } from '../../hooks/useCustomers';
-import { useModal } from '../../hooks/useModal';
 
 export const Customers = (props: CustomersProps) => {
   document.title = 'Customers';
+  useCustomers();
   const { customers } = props;
-  useCustomers(customers);
 
   const newCustomer: Customer = { name: '', address: '', phone: '' };
   return (
@@ -30,9 +29,7 @@ export const Customers = (props: CustomersProps) => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
-          {customers && customers.map((customer) => <CustomerRowContainer key={customer.id} customer={customer} />)}
-        </tbody>
+        <tbody>{customers && customers.map((customer) => <CustomerRowContainer key={customer.id} customer={customer} />)}</tbody>
       </Table>
     </>
   );

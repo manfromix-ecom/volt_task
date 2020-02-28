@@ -1,13 +1,10 @@
-import { useState } from 'react';
-import { Invoice } from 'MyModels';
+import { useEffect } from 'react';
 import { useReduxDispatch } from './useReduxDispatch';
-import { loadInvoicesRequest } from '../features/invoices/actions';
+import { loadInvoicesRequest } from '../store/invoices/actions';
 
-export const useInvoices = (invoices: Invoice[]) => {
-  const [reloadEmpty, setReloadEmpty] = useState(false);
+export const useInvoices = () => {
   const dispatch = useReduxDispatch();
-  if (!reloadEmpty && !invoices.length) {
-    setReloadEmpty(true);
+  useEffect(() => {
     dispatch(loadInvoicesRequest());
-  }
+  }, []);
 };

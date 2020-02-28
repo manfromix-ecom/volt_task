@@ -5,38 +5,30 @@ import { apiClient } from './api-client';
 const mapToModel = ({ data }: AxiosResponse<any[]>): InvoiceItem[] =>
   data.map((invoice) => ({
     id: invoice.id,
-    productId: invoice.productId,
+    invoiceId: invoice.invoice_id,
+    productId: invoice.product_id,
     quantity: invoice.quantity,
   }));
 
-export const invoicesAPI = {
-  index(): Promise<InvoiceItem[]> {
-    return apiClient.get('invoices/').then((response) => {
+export const invoiceItemsAPI = {
+  index(invoiceId: number): Promise<InvoiceItem[]> {
+    return apiClient.get(`invoices/${invoiceId}/items`).then((response) => {
       return mapToModel(response);
     });
   },
-  show(invoice: InvoiceItem) {
-    const { id } = invoice;
-    return apiClient.get(`invoices/${id}`);
+  show(invoiceId: number, id: number) {
+    return apiClient.get(`invoices/${invoiceId}/items/${id}`);
   },
-  create(invoice: InvoiceItem) {
-    const { productId, quantity } = invoice;
-    return apiClient.post('invoices', { product_id: productId, quantity });
+  create(invoiceItem: InvoiceItem) {
+    const { invoiceId, productId, quantity } = invoiceItem;
+    return apiClient.post(`invoices/${invoiceId}/items`, { product_id: productId, quantity });
   },
-  update(invoice: InvoiceItem) {
-    const { id, productId, quantity } = invoice;
-    return apiClient.put(`invoices/${id}`, { product_id: productId, quantity });
+  update(invoiceItem: InvoiceItem) {
+    const { invoiceId, id, productId, quantity } = invoiceItem;
+    return apiClient.put(`invoices/${invoiceId}/items/${id}`, { product_id: productId, quantity });
   },
-  delete(invoice: InvoiceItem) {
-    const { id } = invoice;
-    console.log('invoicesAPI.delete', invoice);
-    return apiClient
-      .delete(`invoices/${id}`, {})
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  delete(invoiceItem: InvoiceItem) {
+    const { invoiceId, id } = invoiceItem;
+    return apiClient.delete(`invoices/${invoiceId}/items/${id}`);
   },
 };

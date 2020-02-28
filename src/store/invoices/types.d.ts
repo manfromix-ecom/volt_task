@@ -6,5 +6,6 @@ declare module 'MyModels' {
     total: number;
     editing?: boolean;
     customer?: Customer;
+    items?: number[];
   };
 }

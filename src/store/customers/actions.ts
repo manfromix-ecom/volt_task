@@ -13,6 +13,7 @@ export const deleteCustomerRequest = (customer: Customer) => {
     customersAPI
       .delete(customer)
       .then(() => dispatch(deleteCustomerCreator(customer)))
+      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 };
@@ -46,6 +47,7 @@ export const loadCustomersRequest = () => {
         const customers = data || [];
         dispatch(setCustomersCreator(customers));
       })
+      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 };

@@ -1,13 +1,10 @@
-import { useState } from 'react';
-import { Customer } from 'MyModels';
+import { useEffect } from 'react';
 import { useReduxDispatch } from './useReduxDispatch';
-import { loadCustomersRequest } from '../features/customers/actions';
+import { loadCustomersRequest } from '../store/customers/actions';
 
-export const useCustomers = (customers: Customer[]) => {
-  const [reloadEmpty, setReloadEmpty] = useState(false);
+export const useCustomers = () => {
   const dispatch = useReduxDispatch();
-  if (!reloadEmpty && !customers.length) {
-    setReloadEmpty(true);
+  useEffect(() => {
     dispatch(loadCustomersRequest());
-  }
+  }, []);
 };

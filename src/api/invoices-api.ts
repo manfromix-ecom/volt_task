@@ -30,14 +30,9 @@ export const invoicesAPI = {
   },
   delete(invoice: Invoice) {
     const { id } = invoice;
-    console.log('invoicesAPI.delete', invoice);
-    return apiClient
-      .delete(`invoices/${id}`, {})
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    return apiClient.delete(`invoices/${id}`, {}).catch((error) => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    });
   },
 };

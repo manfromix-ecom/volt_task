@@ -20,11 +20,7 @@ export const InvoiceRow = (props: InvoiceRowProps) => {
       <td>{total}</td>
       <td>
         <ButtonGroup>
-          <ButtonModal
-            title="Edit Invoice"
-            buttonText="Edit"
-            body={<InvoiceFormContainer initialValues={invoice} />}
-          />
+          <ButtonModal title="Edit Invoice" buttonText="Edit" body={<InvoiceFormContainer initialValues={invoice} />} />
           <Button variant="outline-secondary" onClick={onDelete}>
             Delete
           </Button>

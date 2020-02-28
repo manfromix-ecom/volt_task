@@ -1,31 +1,19 @@
-/* eslint no-console: off */
-
 import { Invoice } from 'MyModels';
 import { Dispatch } from 'redux';
-import {
-  CREATE_INVOICE_REQUEST,
-  DELETE_INVOICE_REQUEST,
-  LOAD_INVOICES_REQUEST,
-  SET_INVOICE_REQUEST,
-  SET_INVOICES,
-  UPDATE_INVOICE_REQUEST,
-} from './constants';
+import { CREATE_INVOICE_REQUEST, DELETE_INVOICE_REQUEST, SET_INVOICE_REQUEST, SET_INVOICES } from './constants';
 import { invoicesAPI } from '../../api/invoices-api';
 
 export const addInvoiceCreator = (invoice: Invoice) => ({ type: CREATE_INVOICE_REQUEST, data: invoice });
-export const updateInvoiceCreator = (invoice: Invoice) => ({ type: UPDATE_INVOICE_REQUEST, data: invoice });
 export const deleteInvoiceCreator = (invoice: Invoice) => ({ type: DELETE_INVOICE_REQUEST, data: invoice });
 export const setInvoiceCreator = (invoice: Invoice) => ({ type: SET_INVOICE_REQUEST, data: invoice });
-export const loadInvoicesCreator = () => ({ type: LOAD_INVOICES_REQUEST });
 export const setInvoicesCreator = (invoices: Invoice[]) => ({ type: SET_INVOICES, data: invoices });
 
 export const deleteInvoiceRequest = (invoice: Invoice) => {
-  console.log('deleteInvoiceRequest');
   return (dispatch: Dispatch<any>) => {
-    console.log('deleteInvoiceRequest invoice', invoice);
     invoicesAPI
       .delete(invoice)
       .then(() => dispatch(deleteInvoiceCreator(invoice)))
+      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 };
@@ -48,9 +36,9 @@ export const loadInvoicesRequest = () => {
       .index()
       .then((data) => {
         const invoices = data || [];
-        console.log('loadInvoicesRequest invoices', invoices);
         dispatch(setInvoicesCreator(invoices));
       })
+      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 };
