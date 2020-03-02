@@ -6,5 +6,5 @@ export const useInvoices = () => {
   const dispatch = useReduxDispatch();
   useEffect(() => {
     dispatch(loadInvoicesRequest());
-  }, []);
+  }, [dispatch]);
 };

@@ -6,5 +6,5 @@ export const useProducts = () => {
   const dispatch = useReduxDispatch();
   useEffect(() => {
     dispatch(loadProductsRequest());
-  }, []);
+  }, [dispatch]);
 };

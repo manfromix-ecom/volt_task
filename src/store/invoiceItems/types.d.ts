@@ -4,6 +4,7 @@ declare module 'MyModels' {
     invoiceId: number;
     productId: number;
     quantity?: number;
+    product?: Product;
     editing?: boolean;
   };
 }

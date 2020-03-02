@@ -4,10 +4,12 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ButtonModal } from '../common/ButtonModal';
 import { InvoiceFormContainer } from '../../containers/InvoiceFormContainer';
 import { InvoiceRowProps } from './types/InvoiceRowProps';
+import { useInvoiceItems } from '../../hooks/useInvoiceItems';
 
 export const InvoiceRow = (props: InvoiceRowProps) => {
   const { invoice, customer, deleteInvoiceRequest } = props;
   const { id, discount, total } = invoice;
+  useInvoiceItems(id || 0);
   const onDelete = () => {
     deleteInvoiceRequest(invoice);
   };

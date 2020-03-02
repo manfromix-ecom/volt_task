@@ -1,7 +1,11 @@
 import { Invoice } from 'MyModels';
 import { Dispatch } from 'redux';
+import { unionBy } from 'lodash';
 import { CREATE_INVOICE_REQUEST, DELETE_INVOICE_REQUEST, SET_INVOICE_REQUEST, SET_INVOICES } from './constants';
 import { invoicesAPI } from '../../api/invoices-api';
+import { deleteInvoiceItemRequest, setInvoiceItem } from '../invoiceItems/actions';
+import { getInvoiceItems, getTotal } from './selectors';
+import { getProduct } from '../products/selectors';
 
 export const addInvoiceCreator = (invoice: Invoice) => ({ type: CREATE_INVOICE_REQUEST, data: invoice });
 export const deleteInvoiceCreator = (invoice: Invoice) => ({ type: DELETE_INVOICE_REQUEST, data: invoice });
@@ -50,6 +54,36 @@ export const setInvoice = (formData: any) => {
       dispatch(updateInvoiceRequest({ customerId, discount, total, id }));
     } else {
       dispatch(createInvoiceRequest({ customerId, discount, total }));
+    }
+  };
+};
+
+export const setInvoiceWithItems = (invoice: any) => {
+  return (dispatch: Dispatch<any>, getState: any) => {
+    const { items } = invoice;
+    if (items) {
+      const state = getState();
+      let allItems = getInvoiceItems(state, invoice.id);
+      const changedItems = items.map((item: any) => {
+        item.product = getProduct(state, item.productId);
+        return item;
+      });
+      allItems = unionBy(changedItems, allItems, 'id');
+      invoice.total = getTotal(state, invoice.id, allItems);
+    }
+    dispatch(setInvoice(invoice));
+    if (items) {
+      Object.keys(items).map(
+        (i) =>
+          new Promise(() => {
+            const item = items[i];
+            if (item.quantity) {
+              dispatch(setInvoiceItem(item));
+            } else {
+              dispatch(deleteInvoiceItemRequest(item));
+            }
+          })
+      );
     }
   };
 };

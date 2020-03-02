@@ -1,7 +1,6 @@
-import { InvoiceItem, Product } from 'MyModels';
+import { InvoiceItem } from 'MyModels';
 
 export interface InvoiceItemRowProps {
   item: InvoiceItem;
-  product: Product;
-  form: any;
+  onChange: any;
 }

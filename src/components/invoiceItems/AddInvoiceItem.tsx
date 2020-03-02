@@ -13,22 +13,20 @@ export const AddInvoiceItem = (props: AddInvoiceItemProps) => {
 
   const onClick = () => {
     const productId = newProduct.current.value;
-    const quantity = 1;
+    const quantity = 0;
     setInvoiceItem({ invoiceId, productId, quantity });
   };
 
   return (
     <Container>
       <Row>
-        <Col>
-          <Form.Group controlId="productId">
-            <Form.Label column={false}>Add product</Form.Label>
-            <Form.Control name="productId" type="select" as="select" ref={newProduct}>
-              <option value="">Select...</option>
-              <ProductOptionsContainer />
-            </Form.Control>
-          </Form.Group>
-        </Col>
+        <Form.Group as={Col} controlId="productId">
+          <Form.Label column={false}>Add product</Form.Label>
+          <Form.Control name="productId" type="select" as="select" ref={newProduct}>
+            <option value="">Select...</option>
+            <ProductOptionsContainer />
+          </Form.Control>
+        </Form.Group>
         <Col>
           <Button variant="outline-secondary" type="button" size="sm" onClick={onClick}>
             Add

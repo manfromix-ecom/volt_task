@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { deleteInvoiceRequest } from '../store/invoices/actions';
+import { deleteInvoiceRequest, setInvoice } from '../store/invoices/actions';
 import { InvoiceRow } from '../components/invoices/InvoiceRow';
 
-export const InvoiceRowContainer = connect(null, { deleteInvoiceRequest })(InvoiceRow);
+export const InvoiceRowContainer = connect(null, { deleteInvoiceRequest, setInvoice })(InvoiceRow);

@@ -1,3 +1,13 @@
-.btn { margin-left: 10px; }
-td .btn-group .btn { min-width: 70px; }
-.suspense_loading { text-align: center; }
+.btn {
+  margin-left: 10px;
+}
+td .btn-group .btn {
+  min-width: 70px;
+}
+.suspense_loading {
+  text-align: center;
+}
+.error {
+  color: #880000;
+  font-size: 12px;
+}

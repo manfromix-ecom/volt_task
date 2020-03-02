@@ -1,8 +1,6 @@
 import { Customer, Invoice } from 'MyModels';
 
-export interface InvoiceRowProps extends InvoiceRowStateProps, InvoiceRowOwnProps {
-  deleteInvoiceRequest: (invoice: Invoice) => void;
-}
+export interface InvoiceRowProps extends InvoiceRowStateProps, InvoiceRowDispatchProps, InvoiceRowOwnProps {}
 
 export interface InvoiceRowOwnProps {
   invoice: Invoice;
@@ -10,3 +8,8 @@ export interface InvoiceRowOwnProps {
 }
 
 export interface InvoiceRowStateProps {}
+
+export interface InvoiceRowDispatchProps {
+  deleteInvoiceRequest: (invoice: Invoice) => void;
+  setInvoice: (invoice: Invoice) => void;
+}

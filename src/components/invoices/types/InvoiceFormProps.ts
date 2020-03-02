@@ -1,10 +1,9 @@
-import { Invoice, InvoiceItem } from 'MyModels';
+import { Invoice } from 'MyModels';
 
 export interface InvoiceFormStateProps {}
 
 export interface InvoiceFormDispatchProps {
-  setInvoice: (invoice: Invoice) => void;
-  setInvoiceItem: (invoiceItem: InvoiceItem) => void;
+  setInvoiceWithItems: (invoice: Invoice) => void;
 }
 
 export interface InvoiceFormOwnProps {
