@@ -12,7 +12,7 @@ export const Products = (props: ProductsProps) => {
   useProducts();
   const { products } = props;
 
-  const newProduct: Product = { name: '', price: '' };
+  const newProduct: Product = { name: '', price: 0 };
   return (
     <>
       <h1>

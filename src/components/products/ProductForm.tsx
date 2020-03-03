@@ -47,7 +47,7 @@ export const ProductForm = (props: ProductFormProps) => {
       </Form.Group>
       <Form.Group controlId="price">
         <Form.Label column={false}>Price</Form.Label>
-        <Form.Control name="price" type="text" value={form.values.price} onChange={form.handleChange} />
+        <Form.Control name="price" type="text" value={String(form.values.price || '')} onChange={form.handleChange} />
         {form.errors.price ? <div className="error">{form.errors.price}</div> : null}
       </Form.Group>
       <Button variant="outline-secondary" type="submit">
