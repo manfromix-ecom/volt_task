@@ -8,7 +8,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import { ProductOptionsContainer } from '../../containers/ProductsOptionsContainer';
 import { AddInvoiceItemProps } from './types/AddInvoiceItemProps';
 
-export const AddInvoiceItem = (props: AddInvoiceItemProps) => {
+export const AddInvoiceItem: React.FC<AddInvoiceItemProps> = (props: AddInvoiceItemProps) => {
   const { invoiceId, setInvoiceItem } = props;
   const newProduct = createRef<FormControl<'select'> & HTMLSelectElement>();
 

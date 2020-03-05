@@ -2,7 +2,7 @@ import React from 'react';
 import { CustomersOptionsProps } from './types/CustomersOptionsProps';
 import { useCustomers } from '../../hooks/useCustomers';
 
-export const CustomerOptions = (props: CustomersOptionsProps) => {
+export const CustomerOptions: React.FC<CustomersOptionsProps> = (props: CustomersOptionsProps) => {
   useCustomers();
   const { customers } = props;
 

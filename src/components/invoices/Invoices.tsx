@@ -9,7 +9,7 @@ import { useCustomers } from '../../hooks/useCustomers';
 import { Invoice } from '../../models/Invoice';
 import { Customer } from '../../models/Customer';
 
-export const Invoices = (props: InvoicesProps) => {
+export const Invoices: React.FC<InvoicesProps> = (props: InvoicesProps) => {
   document.title = 'Invoices';
   useInvoices();
   useCustomers();

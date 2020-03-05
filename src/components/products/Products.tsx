@@ -8,7 +8,7 @@ import { ProductsProps } from './types/ProductsProps';
 import { useProducts } from '../../hooks/useProducts';
 import { Product } from '../../models/Product';
 
-export const Products = (props: ProductsProps) => {
+export const Products: React.FC<ProductsProps> = (props: ProductsProps) => {
   document.title = 'Products';
   useProducts();
   const { products, deleteProductRequest } = props;

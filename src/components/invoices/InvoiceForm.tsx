@@ -25,7 +25,7 @@ const validate = (values: Invoice) => {
   return errors;
 };
 
-export const InvoiceForm = (props: InvoiceFormProps) => {
+export const InvoiceForm: React.FC<InvoiceFormProps> = (props: InvoiceFormProps) => {
   const { initialValues, setInvoiceWithItems } = props;
   useInvoiceItems(initialValues.id);
 

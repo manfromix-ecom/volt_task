@@ -29,7 +29,7 @@ const validate = (values: any) => {
   return errors;
 };
 
-export const CustomerForm = (props: CustomerFormProps) => {
+export const CustomerForm: React.FC<CustomerFormProps> = (props: CustomerFormProps) => {
   const { initialValues, setCustomer } = props;
 
   const onSubmit = (customer: Customer) => {

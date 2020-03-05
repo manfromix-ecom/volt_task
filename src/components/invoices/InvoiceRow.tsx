@@ -6,7 +6,7 @@ import { InvoiceFormContainer } from '../../containers/InvoiceFormContainer';
 import { useInvoiceItems } from '../../hooks/useInvoiceItems';
 import { InvoiceRowProps } from './types/InvoiceRowProps';
 
-export const InvoiceRow = (props: InvoiceRowProps) => {
+export const InvoiceRow: React.FC<InvoiceRowProps> = (props: InvoiceRowProps) => {
   const { invoice, customer, deleteInvoiceRequest } = props;
   const { id, discount, total } = invoice;
   useInvoiceItems(id || 0);

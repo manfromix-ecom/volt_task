@@ -5,7 +5,7 @@ import { InvoiceItemsProps } from './types/InvoiceItemsProps';
 import { AddInvoiceItemContainer } from '../../containers/AddInvoiceItemContainer';
 import { Product } from '../../models/Product';
 
-export const InvoiceItems = (props: InvoiceItemsProps) => {
+export const InvoiceItems: React.FC<InvoiceItemsProps> = (props: InvoiceItemsProps) => {
   const { invoiceItems, invoiceId, products, form } = props;
   const onChange = (e: React.SyntheticEvent) => {
     form.handleChange(e);

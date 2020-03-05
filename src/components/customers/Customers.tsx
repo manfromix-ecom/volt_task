@@ -8,7 +8,7 @@ import { CustomersProps } from './types/CustomersProps';
 import { useCustomers } from '../../hooks/useCustomers';
 import { Customer } from '../../models/Customer';
 
-export const Customers = (props: CustomersProps) => {
+export const Customers: React.FC<CustomersProps> = (props: CustomersProps) => {
   document.title = 'Customers';
   useCustomers();
   const { customers, deleteCustomerRequest } = props;

@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
 
-export const Header = () => {
+export const Header: React.FC = () => {
   return (
     <Navbar bg="light" variant="light">
       <Navbar.Brand>Invoice App</Navbar.Brand>
