@@ -7,9 +7,7 @@ export interface InvoiceItemsStateProps {
   products: Array<Product>;
 }
 
-export interface InvoiceItemsDispatchProps {
-  setInvoiceItem: (invoiceItem: InvoiceItem) => void;
-}
+export interface InvoiceItemsDispatchProps {}
 
 export interface InvoiceItemsProps extends InvoiceItemsDispatchProps, InvoiceItemsStateProps {
   invoiceId: number;

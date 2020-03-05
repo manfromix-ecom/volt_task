@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   return bindActionCreators(combinedActions as any, dispatch);
 };
 
-export const CustomersContainer = connect<CustomersStateProps, CustomerDispatchProps>(
+export const CustomersContainer = connect<CustomersStateProps, CustomerDispatchProps, {}, any>(
   mapStateToProps,
   mapDispatchToProps as any
 )(Customers);

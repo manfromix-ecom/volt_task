@@ -7,6 +7,7 @@ import { CustomerOptionsContainer } from '../../containers/CustomersOptionsConta
 import { InvoiceItemsContainer } from '../../containers/InvoiceItemsContainer';
 import { hideModal } from '../../utils/hideModal';
 import { Invoice } from '../../models/Invoice';
+import { useInvoiceItems } from '../../hooks/useInvoiceItems';
 
 const validate = (values: Invoice) => {
   const errors: any = {};
@@ -26,6 +27,7 @@ const validate = (values: Invoice) => {
 
 export const InvoiceForm = (props: InvoiceFormProps) => {
   const { initialValues, setInvoiceWithItems } = props;
+  useInvoiceItems(initialValues.id);
 
   const onSubmit = (invoice: any) => {
     hideModal();

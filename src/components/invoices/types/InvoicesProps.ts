@@ -5,7 +5,7 @@ export interface InvoicesStateProps {
   invoices: Array<Invoice>;
   customers: Array<Customer>;
 }
-export interface InvoiceDispatchProps {
+export interface InvoicesDispatchProps {
   deleteInvoiceRequest: (invoice: Invoice) => void;
 }
-export interface InvoicesProps extends InvoicesStateProps, InvoiceDispatchProps {}
+export interface InvoicesProps extends InvoicesStateProps, InvoicesDispatchProps {}
