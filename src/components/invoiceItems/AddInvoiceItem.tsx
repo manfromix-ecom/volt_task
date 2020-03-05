@@ -4,12 +4,13 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import FormControl from 'react-bootstrap/FormControl';
 import { ProductOptionsContainer } from '../../containers/ProductsOptionsContainer';
 import { AddInvoiceItemProps } from './types/AddInvoiceItemProps';
 
 export const AddInvoiceItem = (props: AddInvoiceItemProps) => {
   const { invoiceId, setInvoiceItem } = props;
-  const newProduct = createRef<any>();
+  const newProduct = createRef<FormControl<'select'> & HTMLSelectElement>();
 
   const onClick = () => {
     const productId = newProduct.current && newProduct.current.value ? Number(newProduct.current.value) : 0;
