@@ -1,8 +1,8 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form';
 import { InvoiceItemsProps } from './types/InvoiceItemsProps';
 import { AddInvoiceItemContainer } from '../../containers/AddInvoiceItemContainer';
-import { InvoiceItemRow } from './InvoiceItemRow';
 import { Product } from '../../models/Product';
 
 export const InvoiceItems = (props: InvoiceItemsProps) => {
@@ -13,8 +13,19 @@ export const InvoiceItems = (props: InvoiceItemsProps) => {
   const InvoiceItemRows = invoiceItems.map((item) => {
     if (!invoiceId || invoiceId !== item.invoiceId) return null;
     const productsFiltered = products.filter((current: Product) => current.id === Number(item.productId));
-    item.product = productsFiltered.length ? productsFiltered[0] : ({} as Product);
-    return <InvoiceItemRow key={item.id} item={item} onChange={onChange} />;
+    const { id, quantity } = item;
+    const product = productsFiltered.length ? productsFiltered[0] : ({} as Product);
+    if (!product) return null;
+    const { name, price } = product;
+    return (
+      <tr key={item.id}>
+        <td>{name}</td>
+        <td>{price}</td>
+        <td>
+          <Form.Control name={`items[${id},${item.productId}]`} defaultValue={quantity} onChange={onChange} data-price={price} />
+        </td>
+      </tr>
+    );
   });
 
   return (

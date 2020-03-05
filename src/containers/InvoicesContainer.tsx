@@ -4,6 +4,7 @@ import { Invoices } from '../components/invoices/Invoices';
 import { InvoiceDispatchProps, InvoicesStateProps } from '../components/invoices/types/InvoicesProps';
 import { getInvoices } from '../selectors/invoices';
 import { getCustomers } from '../selectors/customers';
+import { deleteInvoiceRequest } from '../store/invoices/actions';
 
 const mapStateToProps = (state: Types.RootState): InvoicesStateProps => {
   return {
@@ -12,4 +13,7 @@ const mapStateToProps = (state: Types.RootState): InvoicesStateProps => {
   };
 };
 
-export const InvoicesContainer = connect<InvoicesStateProps, InvoiceDispatchProps, {}, any>(mapStateToProps, {})(Invoices);
+
+export const InvoicesContainer = connect<InvoicesStateProps, InvoiceDispatchProps, {}, any>(mapStateToProps, { deleteInvoiceRequest })(
+  Invoices
+);

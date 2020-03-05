@@ -2,9 +2,12 @@ import { useEffect } from 'react';
 import { useReduxDispatch } from './useReduxDispatch';
 import { loadInvoiceItemsRequest } from '../store/invoiceItems/actions';
 
-export const useInvoiceItems = (invoiceId: number) => {
+export const useInvoicesItems = (invoiceIds: Array<number | undefined>) => {
   const dispatch = useReduxDispatch();
+
   useEffect(() => {
-    dispatch(loadInvoiceItemsRequest(invoiceId));
-  }, [invoiceId, dispatch]);
+    invoiceIds.forEach((invoiceId) => {
+      if (invoiceId) return dispatch(loadInvoiceItemsRequest(invoiceId));
+    });
+  }, [dispatch]);
 };
