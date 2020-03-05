@@ -1,4 +1,4 @@
-import { InvoiceItem } from 'MyModels';
+import { InvoiceItem } from '../../../models/InvoiceItem';
 
 export interface AddInvoiceItemProps {
   invoiceId: number;

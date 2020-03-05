@@ -1,6 +1,6 @@
-import { Customer } from 'MyModels';
 import * as actions from '../actions';
 import * as types from '../constants';
+import { Customer } from '../../../models/Customer';
 
 const fakeCustomer: Customer = { name: 'Test Name', address: 'Test Address', phone: '555-555-5555', id: 1 };
 const newCustomer: Customer = { name: 'Another Name', address: 'Another Address', phone: '555-000-0000' };
@@ -8,7 +8,7 @@ const newCustomer: Customer = { name: 'Another Name', address: 'Another Address'
 describe('customers actions', () => {
   it('should create an action to set customer', () => {
     const expectedAction = {
-      type: types.SET_CUSTOMER_REQUEST,
+      type: types.SET_CUSTOMER,
       data: newCustomer,
     };
     expect(actions.setCustomerCreator(newCustomer)).toEqual(expectedAction);
@@ -16,7 +16,7 @@ describe('customers actions', () => {
 
   it('should create an action to create customer', () => {
     const expectedAction = {
-      type: types.CREATE_CUSTOMER_REQUEST,
+      type: types.CREATE_CUSTOMER,
       data: newCustomer,
     };
     expect(actions.addCustomerCreator(newCustomer)).toEqual(expectedAction);
@@ -24,7 +24,7 @@ describe('customers actions', () => {
 
   it('should create an action to delete customer', () => {
     const expectedAction = {
-      type: types.DELETE_CUSTOMER_REQUEST,
+      type: types.DELETE_CUSTOMER,
       data: fakeCustomer,
     };
     expect(actions.deleteCustomerCreator(fakeCustomer)).toEqual(expectedAction);

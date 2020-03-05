@@ -1,23 +1,25 @@
-import { Invoice } from 'MyModels';
+/* eslint no-console: off */
 import { Dispatch } from 'redux';
 import { unionBy } from 'lodash';
-import { CREATE_INVOICE_REQUEST, DELETE_INVOICE_REQUEST, SET_INVOICE_REQUEST, SET_INVOICES } from './constants';
-import { invoicesAPI } from '../../api/invoices-api';
+import { Types } from 'MyTypes';
+import { CREATE_INVOICE, DELETE_INVOICE, SET_INVOICE, SET_INVOICES } from './constants';
+import { invoicesAPI } from './api';
 import { deleteInvoiceItemRequest, setInvoiceItem } from '../invoiceItems/actions';
-import { getInvoiceItems, getTotal } from './selectors';
-import { getProduct } from '../products/selectors';
+import { getTotal } from '../../selectors/invoices';
+import { getProduct } from '../../selectors/products';
+import { Invoice } from '../../models/Invoice';
+import { getInvoiceItems } from '../../selectors/invoiceItems';
 
-export const addInvoiceCreator = (invoice: Invoice) => ({ type: CREATE_INVOICE_REQUEST, data: invoice });
-export const deleteInvoiceCreator = (invoice: Invoice) => ({ type: DELETE_INVOICE_REQUEST, data: invoice });
-export const setInvoiceCreator = (invoice: Invoice) => ({ type: SET_INVOICE_REQUEST, data: invoice });
-export const setInvoicesCreator = (invoices: Invoice[]) => ({ type: SET_INVOICES, data: invoices });
+export const addInvoiceCreator = (invoice: Invoice) => ({ type: CREATE_INVOICE, data: invoice });
+export const deleteInvoiceCreator = (invoice: Invoice) => ({ type: DELETE_INVOICE, data: invoice });
+export const setInvoiceCreator = (invoice: Invoice) => ({ type: SET_INVOICE, data: invoice });
+export const setInvoicesCreator = (invoices: Array<Invoice>) => ({ type: SET_INVOICES, data: invoices });
 
 export const deleteInvoiceRequest = (invoice: Invoice) => {
   return (dispatch: Dispatch<any>) => {
     invoicesAPI
       .delete(invoice)
       .then(() => dispatch(deleteInvoiceCreator(invoice)))
-      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 };
@@ -42,12 +44,11 @@ export const loadInvoicesRequest = () => {
         const invoices = data || [];
         dispatch(setInvoicesCreator(invoices));
       })
-      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 };
 
-export const setInvoice = (formData: any) => {
+export const setInvoice = (formData: Invoice) => {
   return (dispatch: Dispatch<any>) => {
     const { customerId, discount, total, id } = formData;
     if (id) {
@@ -58,13 +59,13 @@ export const setInvoice = (formData: any) => {
   };
 };
 
-export const setInvoiceWithItems = (invoice: any) => {
-  return (dispatch: Dispatch<any>, getState: any) => {
+export const setInvoiceWithItems = (invoice: Invoice) => {
+  return (dispatch: Dispatch<any>, getState: Types.RootState) => {
     const { items } = invoice;
-    if (items) {
+    if (invoice.id && items) {
       const state = getState();
       let allItems = getInvoiceItems(state, invoice.id);
-      const changedItems = items.map((item: any) => {
+      const changedItems = items.map((item) => {
         item.product = getProduct(state, item.productId);
         return item;
       });
@@ -76,7 +77,7 @@ export const setInvoiceWithItems = (invoice: any) => {
       Object.keys(items).map(
         (i) =>
           new Promise(() => {
-            const item = items[i];
+            const item = items[Number(i)];
             if (item.quantity) {
               dispatch(setInvoiceItem(item));
             } else {

@@ -1,6 +1,7 @@
-import { InvoiceItem } from 'MyModels';
+import React from 'react';
+import { InvoiceItem } from '../../../models/InvoiceItem';
 
 export interface InvoiceItemRowProps {
   item: InvoiceItem;
-  onChange: any;
+  onChange: (e: React.SyntheticEvent) => void;
 }

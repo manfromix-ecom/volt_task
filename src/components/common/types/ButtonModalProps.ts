@@ -1,5 +1,7 @@
-export interface modalProps {
-  title?: string | null;
-  body?: JSX.Element | null;
-  buttonText?: string | null;
+import { ReactNode } from 'react';
+
+export interface ButtonModalProps {
+  title?: string;
+  buttonText?: string;
+  children?: ReactNode;
 }

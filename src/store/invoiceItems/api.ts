@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios';
-import { InvoiceItem } from 'MyModels';
-import { apiClient } from './api-client';
+import { apiClient } from '../apiClient';
+import { apiInvoiceItem, InvoiceItem } from '../../models/InvoiceItem';
 
-const mapToModel = ({ data }: AxiosResponse<any[]>): InvoiceItem[] =>
+const mapToModel = ({ data }: AxiosResponse<Array<apiInvoiceItem>>): Array<InvoiceItem> =>
   data.map((invoice) => ({
     id: invoice.id,
     invoiceId: invoice.invoice_id,
@@ -11,7 +11,7 @@ const mapToModel = ({ data }: AxiosResponse<any[]>): InvoiceItem[] =>
   }));
 
 export const invoiceItemsAPI = {
-  index(invoiceId: number): Promise<InvoiceItem[]> {
+  index(invoiceId: number): Promise<Array<InvoiceItem>> {
     return apiClient.get(`invoices/${invoiceId}/items`).then((response) => {
       return mapToModel(response);
     });

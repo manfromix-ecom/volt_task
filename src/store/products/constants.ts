@@ -1,5 +1,5 @@
-export const SET_PRODUCT_REQUEST = 'products/SET_PRODUCT_REQUEST';
-export const CREATE_PRODUCT_REQUEST = 'products/CREATE_PRODUCT_REQUEST';
-export const UPDATE_PRODUCT_REQUEST = 'products/UPDATE_PRODUCT_REQUEST';
-export const DELETE_PRODUCT_REQUEST = 'products/DELETE_PRODUCT_REQUEST';
+export const SET_PRODUCT = 'products/SET_PRODUCT';
+export const CREATE_PRODUCT = 'products/CREATE_PRODUCT';
+export const UPDATE_PRODUCT = 'products/UPDATE_PRODUCT';
+export const DELETE_PRODUCT = 'products/DELETE_PRODUCT';
 export const SET_PRODUCTS = 'products/SET_PRODUCTS';

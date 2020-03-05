@@ -1,17 +1,17 @@
-import { Product } from 'MyModels';
-import { CREATE_PRODUCT_REQUEST, DELETE_PRODUCT_REQUEST, SET_PRODUCT_REQUEST, SET_PRODUCTS, UPDATE_PRODUCT_REQUEST } from './constants';
+import { Product } from '../../models/Product';
+import { CREATE_PRODUCT, DELETE_PRODUCT, SET_PRODUCT, SET_PRODUCTS, UPDATE_PRODUCT } from './constants';
 
-const initialState: Product[] = [];
+const initialState: Array<Product> = [];
 
-export const productsReducer = (state: Product[] = initialState, action: { type: string; data: any }): Product[] => {
+export const productsReducer = (state: Array<Product> = initialState, action: { type: string; data: any }): Array<Product> => {
   switch (action.type) {
-    case CREATE_PRODUCT_REQUEST:
+    case CREATE_PRODUCT:
       return state.concat([action.data]);
-    case DELETE_PRODUCT_REQUEST:
+    case DELETE_PRODUCT:
       return state.filter((product) => product.id !== action.data.id);
-    case UPDATE_PRODUCT_REQUEST:
+    case UPDATE_PRODUCT:
       return state.map((product) => (product.id === action.data.id ? { ...product, editing: !product.editing } : product));
-    case SET_PRODUCT_REQUEST:
+    case SET_PRODUCT:
       return state.map((product) => {
         if (product.id === action.data.id) {
           return {

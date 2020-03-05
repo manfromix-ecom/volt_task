@@ -1,7 +1,7 @@
-import { Product } from 'MyModels';
+import { Product } from '../../../models/Product';
 
 export interface ProductsStateProps {
-  products: Product[];
+  products: Array<Product>;
 }
 export interface ProductDispatchProps {}
 export interface ProductsProps extends ProductsStateProps, ProductDispatchProps {}

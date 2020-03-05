@@ -1,17 +1,13 @@
-import { Product } from 'MyModels';
+/* eslint no-console: off */
 import { Dispatch } from 'redux';
-import {
-  CREATE_PRODUCT_REQUEST,
-  DELETE_PRODUCT_REQUEST,
-  SET_PRODUCT_REQUEST,
-  SET_PRODUCTS,
-} from './constants';
-import { productsAPI } from '../../api/products-api';
+import { Product } from '../../models/Product';
+import { CREATE_PRODUCT, DELETE_PRODUCT, SET_PRODUCT, SET_PRODUCTS } from './constants';
+import { productsAPI } from './api';
 
-export const addProductCreator = (product: Product) => ({ type: CREATE_PRODUCT_REQUEST, data: product });
-export const deleteProductCreator = (product: Product) => ({ type: DELETE_PRODUCT_REQUEST, data: product });
-export const setProductCreator = (product: Product) => ({ type: SET_PRODUCT_REQUEST, data: product });
-export const setProductsCreator = (products: Product[]) => ({ type: SET_PRODUCTS, data: products });
+export const addProductCreator = (product: Product) => ({ type: CREATE_PRODUCT, data: product });
+export const deleteProductCreator = (product: Product) => ({ type: DELETE_PRODUCT, data: product });
+export const setProductCreator = (product: Product) => ({ type: SET_PRODUCT, data: product });
+export const setProductsCreator = (products: Array<Product>) => ({ type: SET_PRODUCTS, data: products });
 
 export const deleteProductRequest = (product: Product) => {
   return (dispatch: Dispatch<any>) => {

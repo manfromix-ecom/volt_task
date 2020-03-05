@@ -1,4 +1,5 @@
-import { Customer, Invoice } from 'MyModels';
+import { Invoice } from '../../../models/Invoice';
+import { Customer } from '../../../models/Customer';
 
 export interface InvoiceRowProps extends InvoiceRowStateProps, InvoiceRowDispatchProps, InvoiceRowOwnProps {}
 

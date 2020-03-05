@@ -1,6 +1,6 @@
-import { InvoiceItem } from 'MyModels';
 import * as actions from '../actions';
 import * as types from '../constants';
+import { InvoiceItem } from '../../../models/InvoiceItem';
 
 describe('invoiceItems actions', () => {
   const fakeInvoiceItem: InvoiceItem = { productId: 1, invoiceId: 1, quantity: 10, id: 1 };
@@ -8,7 +8,7 @@ describe('invoiceItems actions', () => {
 
   it('should create an action to set invoiceItem', () => {
     const expectedAction = {
-      type: types.SET_INVOICE_ITEM_REQUEST,
+      type: types.SET_INVOICE_ITEM,
       data: newInvoiceItem,
     };
     expect(actions.setInvoiceItemCreator(newInvoiceItem)).toEqual(expectedAction);
@@ -16,7 +16,7 @@ describe('invoiceItems actions', () => {
 
   it('should create an action to create invoiceItem', () => {
     const expectedAction = {
-      type: types.CREATE_INVOICE_ITEM_REQUEST,
+      type: types.CREATE_INVOICE_ITEM,
       data: newInvoiceItem,
     };
     expect(actions.addInvoiceItemCreator(newInvoiceItem)).toEqual(expectedAction);
@@ -24,7 +24,7 @@ describe('invoiceItems actions', () => {
 
   it('should create an action to delete invoiceItem', () => {
     const expectedAction = {
-      type: types.DELETE_INVOICE_ITEM_REQUEST,
+      type: types.DELETE_INVOICE_ITEM,
       data: fakeInvoiceItem,
     };
     expect(actions.deleteInvoiceItemCreator(fakeInvoiceItem)).toEqual(expectedAction);

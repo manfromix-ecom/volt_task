@@ -1,40 +1,41 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
 import { Provider } from 'react-redux';
-import { Invoice } from 'MyModels';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import store from '../../../store';
 import { InvoiceForm } from '../InvoiceForm';
 import { InvoiceItems } from '../../invoiceItems/InvoiceItems';
 import { InvoiceFormContainer } from '../../../containers/InvoiceFormContainer';
+import { Invoice } from '../../../models/Invoice';
 
-let wrapper: any;
+let shallowWrapper: ShallowWrapper;
+let wrapper: ReactWrapper;
 const providerOptions = {
   wrappingComponent: Provider,
   wrappingComponentProps: { store },
 };
-const newInvoice: Invoice = { customerId: 0, discount: 0, total: 0 };
 
+const newInvoice: Invoice = { customerId: 0, discount: 0, total: 0 };
 describe('InvoiceForm - Shallow Rendering', () => {
   beforeEach(() => {
-    wrapper = shallow(<InvoiceForm initialValues={newInvoice} setInvoiceWithItems={() => {}} />, providerOptions);
+    shallowWrapper = shallow(<InvoiceForm initialValues={newInvoice} setInvoiceWithItems={() => {}} />, providerOptions);
   });
 
   test('renders', () => {
-    expect(wrapper.exists()).toBe(true);
+    expect(shallowWrapper.exists()).toBe(true);
   });
 
   test('inputs exists', () => {
-    expect(wrapper.find('input').length).toBeGreaterThan(0);
+    expect(shallowWrapper.find('input').length).toBeGreaterThan(0);
   });
 
   test('h5 exists', () => {
-    expect(wrapper.find('h5').length).toEqual(1);
+    expect(shallowWrapper.find('h5').length).toEqual(1);
   });
 
   test('h5 text', () => {
-    expect(wrapper.find('h5').text()).toMatch(/Total: 0/);
+    expect(shallowWrapper.find('h5').text()).toMatch(/Total: 0/);
   });
 });
 

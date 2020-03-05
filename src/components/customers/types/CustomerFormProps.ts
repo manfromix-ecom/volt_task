@@ -1,4 +1,4 @@
-import { Customer } from 'MyModels';
+import { Customer } from '../../../models/Customer';
 
 export interface CustomerFormProps {
   initialValues: Customer;

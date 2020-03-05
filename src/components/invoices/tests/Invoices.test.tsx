@@ -1,10 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import { Provider } from 'react-redux';
 import store from '../../../store';
 import { InvoicesContainer } from '../../../containers/InvoicesContainer';
 
-let wrapper: any;
+let wrapper: ReactWrapper;
 const providerOptions = {
   wrappingComponent: Provider,
   wrappingComponentProps: { store },

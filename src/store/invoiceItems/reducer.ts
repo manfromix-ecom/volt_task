@@ -1,26 +1,20 @@
-import { InvoiceItem } from 'MyModels';
 import { unionBy } from 'lodash';
-import {
-  CREATE_INVOICE_ITEM_REQUEST,
-  DELETE_INVOICE_ITEM_REQUEST,
-  SET_INVOICE_ITEM_REQUEST,
-  SET_INVOICE_ITEMS,
-  UPDATE_INVOICE_ITEM_REQUEST,
-} from './constants';
+import { InvoiceItem } from '../../models/InvoiceItem';
+import { CREATE_INVOICE_ITEM, DELETE_INVOICE_ITEM, SET_INVOICE_ITEM, SET_INVOICE_ITEMS, UPDATE_INVOICE_ITEM } from './constants';
 
-const initialState: InvoiceItem[] = [];
+const initialState: Array<InvoiceItem> = [];
 
-export const invoiceItemsReducer = (state: InvoiceItem[] = initialState, action: { type: string; data: any }): InvoiceItem[] => {
+export const invoiceItemsReducer = (state: Array<InvoiceItem> = initialState, action: { type: string; data: any }): Array<InvoiceItem> => {
   switch (action.type) {
-    case CREATE_INVOICE_ITEM_REQUEST:
+    case CREATE_INVOICE_ITEM:
       return state.concat([action.data]);
-    case DELETE_INVOICE_ITEM_REQUEST:
+    case DELETE_INVOICE_ITEM:
       return state.filter((invoiceItem) => invoiceItem.id !== action.data.id);
-    case UPDATE_INVOICE_ITEM_REQUEST:
+    case UPDATE_INVOICE_ITEM:
       return state.map((invoiceItem) =>
         invoiceItem.id === action.data.id ? { ...invoiceItem, editing: !invoiceItem.editing } : invoiceItem
       );
-    case SET_INVOICE_ITEM_REQUEST:
+    case SET_INVOICE_ITEM:
       return state.map((invoiceItem) => {
         if (invoiceItem.id === action.data.id) {
           return {

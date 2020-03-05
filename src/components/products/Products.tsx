@@ -1,4 +1,3 @@
-import { Product } from 'MyModels';
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { ButtonModal } from '../common/ButtonModal';
@@ -6,6 +5,7 @@ import { ProductFormContainer } from '../../containers/ProductFormContainer';
 import { ProductsProps } from './types/ProductsProps';
 import { ProductRowContainer } from '../../containers/ProductRowContainer';
 import { useProducts } from '../../hooks/useProducts';
+import { Product } from '../../models/Product';
 
 export const Products = (props: ProductsProps) => {
   document.title = 'Products';
@@ -17,7 +17,9 @@ export const Products = (props: ProductsProps) => {
     <>
       <h1>
         Product List
-        <ButtonModal title="Add Product" body={<ProductFormContainer initialValues={newProduct} />} />
+        <ButtonModal title="Add Product">
+          <ProductFormContainer initialValues={newProduct} />
+        </ButtonModal>
       </h1>
       <Table hover responsive>
         <thead>

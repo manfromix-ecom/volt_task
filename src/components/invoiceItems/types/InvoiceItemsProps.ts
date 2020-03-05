@@ -1,8 +1,10 @@
-import { InvoiceItem, Product } from 'MyModels';
+import { useFormik } from 'formik';
+import { InvoiceItem } from '../../../models/InvoiceItem';
+import { Product } from '../../../models/Product';
 
 export interface InvoiceItemsStateProps {
-  invoiceItems: InvoiceItem[];
-  products: Product[];
+  invoiceItems: Array<InvoiceItem>;
+  products: Array<Product>;
 }
 
 export interface InvoiceItemsDispatchProps {
@@ -11,5 +13,7 @@ export interface InvoiceItemsDispatchProps {
 
 export interface InvoiceItemsProps extends InvoiceItemsDispatchProps, InvoiceItemsStateProps {
   invoiceId: number;
-  form: any;
+  form: {
+    handleChange: ReturnType<typeof useFormik>['handleChange'];
+  };
 }

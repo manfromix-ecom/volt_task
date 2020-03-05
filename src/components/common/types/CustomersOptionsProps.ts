@@ -1,9 +1,9 @@
-import { Customer } from 'MyModels';
+import { Customer } from '../../../models/Customer';
 
 export interface CustomersOptionsProps extends CustomersOptionsStateProps, CustomersOptionsDispatchProps {}
 
 export interface CustomersOptionsStateProps {
-  customers: Customer[];
+  customers: Array<Customer>;
 }
 
 export interface CustomersOptionsDispatchProps {}

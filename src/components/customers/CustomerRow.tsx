@@ -20,11 +20,9 @@ export const CustomerRow = (props: CustomerRowProps) => {
       <td>{phone}</td>
       <td>
         <ButtonGroup>
-          <ButtonModal
-            title="Edit Customer"
-            buttonText="Edit"
-            body={<CustomerFormContainer initialValues={customer} />}
-          />
+          <ButtonModal title="Edit Customer" buttonText="Edit">
+            <CustomerFormContainer initialValues={customer} />
+          </ButtonModal>
           <Button variant="outline-secondary" onClick={onDelete}>
             Delete
           </Button>

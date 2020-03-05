@@ -1,8 +1,9 @@
-import { Customer, Invoice } from 'MyModels';
+import { Invoice } from '../../../models/Invoice';
+import { Customer } from '../../../models/Customer';
 
 export interface InvoicesStateProps {
-  invoices: Invoice[];
-  customers: Customer[];
+  invoices: Array<Invoice>;
+  customers: Array<Customer>;
 }
 export interface InvoiceDispatchProps {}
 export interface InvoicesProps extends InvoicesStateProps, InvoiceDispatchProps {}

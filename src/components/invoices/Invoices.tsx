@@ -1,4 +1,3 @@
-import { Customer, Invoice } from 'MyModels';
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { ButtonModal } from '../common/ButtonModal';
@@ -7,6 +6,8 @@ import { InvoicesProps } from './types/InvoicesProps';
 import { InvoiceRowContainer } from '../../containers/InvoiceRowContainer';
 import { useInvoices } from '../../hooks/useInvoices';
 import { useCustomers } from '../../hooks/useCustomers';
+import { Invoice } from '../../models/Invoice';
+import { Customer } from '../../models/Customer';
 
 export const Invoices = (props: InvoicesProps) => {
   document.title = 'Invoices';
@@ -19,7 +20,9 @@ export const Invoices = (props: InvoicesProps) => {
     <>
       <h1>
         Invoice List
-        <ButtonModal title="Add Invoice" body={<InvoiceFormContainer initialValues={newInvoice} />} />
+        <ButtonModal title="Add Invoice">
+          <InvoiceFormContainer initialValues={newInvoice} />
+        </ButtonModal>
       </h1>
       <Table hover responsive>
         <thead>

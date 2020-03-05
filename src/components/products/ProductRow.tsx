@@ -19,11 +19,9 @@ export const ProductRow = (props: ProductRowProps) => {
       <td>{price}</td>
       <td>
         <ButtonGroup>
-          <ButtonModal
-            title="Edit Product"
-            buttonText="Edit"
-            body={<ProductFormContainer initialValues={product} />}
-          />
+          <ButtonModal title="Edit Product" buttonText="Edit">
+            <ProductFormContainer initialValues={product} />
+          </ButtonModal>
           <Button variant="outline-secondary" onClick={onDelete}>
             Delete
           </Button>

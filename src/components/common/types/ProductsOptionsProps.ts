@@ -1,9 +1,9 @@
-import { Product } from 'MyModels';
+import { Product } from '../../../models/Product';
 
 export interface ProductsOptionsProps extends ProductsOptionsStateProps, ProductsOptionsDispatchProps {}
 
 export interface ProductsOptionsStateProps {
-  products: Product[];
+  products: Array<Product>;
 }
 
 export interface ProductsOptionsDispatchProps {}

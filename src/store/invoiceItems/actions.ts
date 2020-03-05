@@ -1,19 +1,19 @@
-import { InvoiceItem } from 'MyModels';
+/* eslint no-console: off */
 import { Dispatch } from 'redux';
-import { CREATE_INVOICE_ITEM_REQUEST, DELETE_INVOICE_ITEM_REQUEST, SET_INVOICE_ITEM_REQUEST, SET_INVOICE_ITEMS } from './constants';
-import { invoiceItemsAPI } from '../../api/invoice-items-api';
+import { CREATE_INVOICE_ITEM, DELETE_INVOICE_ITEM, SET_INVOICE_ITEM, SET_INVOICE_ITEMS } from './constants';
+import { invoiceItemsAPI } from './api';
+import { InvoiceItem } from '../../models/InvoiceItem';
 
-export const addInvoiceItemCreator = (invoiceItem: InvoiceItem) => ({ type: CREATE_INVOICE_ITEM_REQUEST, data: invoiceItem });
-export const deleteInvoiceItemCreator = (invoiceItem: InvoiceItem) => ({ type: DELETE_INVOICE_ITEM_REQUEST, data: invoiceItem });
-export const setInvoiceItemCreator = (invoiceItem: InvoiceItem) => ({ type: SET_INVOICE_ITEM_REQUEST, data: invoiceItem });
-export const setInvoiceItemsCreator = (invoiceItems: InvoiceItem[]) => ({ type: SET_INVOICE_ITEMS, data: invoiceItems });
+export const addInvoiceItemCreator = (invoiceItem: InvoiceItem) => ({ type: CREATE_INVOICE_ITEM, data: invoiceItem });
+export const deleteInvoiceItemCreator = (invoiceItem: InvoiceItem) => ({ type: DELETE_INVOICE_ITEM, data: invoiceItem });
+export const setInvoiceItemCreator = (invoiceItem: InvoiceItem) => ({ type: SET_INVOICE_ITEM, data: invoiceItem });
+export const setInvoiceItemsCreator = (invoiceItems: Array<InvoiceItem>) => ({ type: SET_INVOICE_ITEMS, data: invoiceItems });
 
 export const deleteInvoiceItemRequest = (invoiceItem: InvoiceItem) => {
   return (dispatch: Dispatch<any>) => {
     invoiceItemsAPI
       .delete(invoiceItem)
       .then(() => dispatch(deleteInvoiceItemCreator(invoiceItem)))
-      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 };
@@ -38,14 +38,13 @@ export const loadInvoiceItemsRequest = (invoiceId: number) => {
         const invoiceItems = data || [];
         dispatch(setInvoiceItemsCreator(invoiceItems));
       })
-      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 };
 
-export const setInvoiceItem = (formData: any) => {
+export const setInvoiceItem = (item: InvoiceItem) => {
   return (dispatch: Dispatch<any>) => {
-    const { invoiceId, productId, quantity, id } = formData;
+    const { invoiceId, productId, quantity, id } = item;
     if (id) {
       dispatch(updateInvoiceItemRequest({ invoiceId, productId, quantity, id }));
     } else {

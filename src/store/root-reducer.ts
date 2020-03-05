@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { customersReducer } from './customers/reducer';
+import { customersReducer } from './customers';
 import { productsReducer } from './products/reducer';
 import { invoicesReducer } from './invoices/reducer';
 import { invoiceItemsReducer } from './invoiceItems/reducer';

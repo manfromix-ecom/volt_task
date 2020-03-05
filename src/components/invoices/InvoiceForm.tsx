@@ -6,8 +6,9 @@ import { InvoiceFormProps } from './types/InvoiceFormProps';
 import { CustomerOptionsContainer } from '../../containers/CustomersOptionsContainer';
 import { InvoiceItemsContainer } from '../../containers/InvoiceItemsContainer';
 import { hideModal } from '../../utils/hideModal';
+import { Invoice } from '../../models/Invoice';
 
-const validate = (values: any) => {
+const validate = (values: Invoice) => {
   const errors: any = {};
 
   if (!values.discount) {

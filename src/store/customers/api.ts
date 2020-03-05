@@ -1,8 +1,9 @@
+/* eslint no-console: off */
 import { AxiosResponse } from 'axios';
-import { Customer } from 'MyModels';
-import { apiClient } from './api-client';
+import { apiClient } from '../apiClient';
+import { apiCustomer, Customer } from '../../models/Customer';
 
-const mapToModel = ({ data }: AxiosResponse<any[]>): Customer[] =>
+const mapToModel = ({ data }: AxiosResponse<Array<apiCustomer>>): Array<Customer> =>
   data.map((customer) => ({
     id: customer.id,
     name: customer.name,
@@ -11,16 +12,15 @@ const mapToModel = ({ data }: AxiosResponse<any[]>): Customer[] =>
   }));
 
 export const customersAPI = {
-  index(): Promise<Customer[]> {
+  index(): Promise<Array<Customer>> {
     return apiClient
       .get('customers/')
       .then((response) => {
         return mapToModel(response);
       })
       .catch((error) => {
-        // eslint-disable-next-line no-console
         console.log(error);
-        return [] as Customer[];
+        return [] as Array<Customer>;
       });
   },
   show(customer: Customer) {
@@ -38,7 +38,6 @@ export const customersAPI = {
   delete(customer: Customer) {
     const { id } = customer;
     return apiClient.delete(`customers/${id}`, {}).catch((error) => {
-      // eslint-disable-next-line no-console
       console.log(error);
     });
   },

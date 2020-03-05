@@ -1,5 +1,5 @@
-export const SET_CUSTOMER_REQUEST = 'customers/SET_CUSTOMER_REQUEST';
-export const CREATE_CUSTOMER_REQUEST = 'customers/CREATE_CUSTOMER_REQUEST';
-export const UPDATE_CUSTOMER_REQUEST = 'customers/UPDATE_CUSTOMER_REQUEST';
-export const DELETE_CUSTOMER_REQUEST = 'customers/DELETE_CUSTOMER_REQUEST';
+export const SET_CUSTOMER = 'customers/SET_CUSTOMER';
+export const CREATE_CUSTOMER = 'customers/CREATE_CUSTOMER';
+export const UPDATE_CUSTOMER = 'customers/UPDATE_CUSTOMER';
+export const DELETE_CUSTOMER = 'customers/DELETE_CUSTOMER';
 export const SET_CUSTOMERS = 'customers/SET_CUSTOMERS';

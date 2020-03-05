@@ -2,9 +2,9 @@ import React from 'react';
 import { useFormik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Customer } from 'MyModels';
 import { CustomerFormProps } from './types/CustomerFormProps';
 import { hideModal } from '../../utils/hideModal';
+import { Customer } from '../../models/Customer';
 
 const validate = (values: any) => {
   const errors: any = {};

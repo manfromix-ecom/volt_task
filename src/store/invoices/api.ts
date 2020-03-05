@@ -1,8 +1,9 @@
+/* eslint no-console: off */
 import { AxiosResponse } from 'axios';
-import { Invoice } from 'MyModels';
-import { apiClient } from './api-client';
+import { apiClient } from '../apiClient';
+import { apiInvoice, Invoice } from '../../models/Invoice';
 
-const mapToModel = ({ data }: AxiosResponse<any[]>): Invoice[] =>
+const mapToModel = ({ data }: AxiosResponse<Array<apiInvoice>>): Array<Invoice> =>
   data.map((invoice) => ({
     id: invoice.id,
     customerId: invoice.customer_id,
@@ -11,7 +12,7 @@ const mapToModel = ({ data }: AxiosResponse<any[]>): Invoice[] =>
   }));
 
 export const invoicesAPI = {
-  index(): Promise<Invoice[]> {
+  index(): Promise<Array<Invoice>> {
     return apiClient.get('invoices/').then((response) => {
       return mapToModel(response);
     });
@@ -31,7 +32,6 @@ export const invoicesAPI = {
   delete(invoice: Invoice) {
     const { id } = invoice;
     return apiClient.delete(`invoices/${id}`, {}).catch((error) => {
-      // eslint-disable-next-line no-console
       console.log(error);
     });
   },

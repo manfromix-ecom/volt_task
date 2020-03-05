@@ -1,19 +1,19 @@
-import { Customer } from 'MyModels';
+/* eslint no-console: off */
 import { Dispatch } from 'redux';
-import { CREATE_CUSTOMER_REQUEST, DELETE_CUSTOMER_REQUEST, SET_CUSTOMER_REQUEST, SET_CUSTOMERS } from './constants';
-import { customersAPI } from '../../api/customers-api';
+import { CREATE_CUSTOMER, DELETE_CUSTOMER, SET_CUSTOMER, SET_CUSTOMERS } from './constants';
+import { customersAPI } from './api';
+import { Customer } from '../../models/Customer';
 
-export const addCustomerCreator = (customer: Customer) => ({ type: CREATE_CUSTOMER_REQUEST, data: customer });
-export const deleteCustomerCreator = (customer: Customer) => ({ type: DELETE_CUSTOMER_REQUEST, data: customer });
-export const setCustomerCreator = (customer: Customer) => ({ type: SET_CUSTOMER_REQUEST, data: customer });
-export const setCustomersCreator = (customers: Customer[]) => ({ type: SET_CUSTOMERS, data: customers });
+export const addCustomerCreator = (customer: Customer) => ({ type: CREATE_CUSTOMER, data: customer });
+export const deleteCustomerCreator = (customer: Customer) => ({ type: DELETE_CUSTOMER, data: customer });
+export const setCustomerCreator = (customer: Customer) => ({ type: SET_CUSTOMER, data: customer });
+export const setCustomersCreator = (customers: Array<Customer>) => ({ type: SET_CUSTOMERS, data: customers });
 
 export const deleteCustomerRequest = (customer: Customer) => {
   return (dispatch: Dispatch<any>) => {
     customersAPI
       .delete(customer)
       .then(() => dispatch(deleteCustomerCreator(customer)))
-      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 };
@@ -47,7 +47,6 @@ export const loadCustomersRequest = () => {
         const customers = data || [];
         dispatch(setCustomersCreator(customers));
       })
-      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 };

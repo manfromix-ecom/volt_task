@@ -1,24 +1,17 @@
-import { Customer } from 'MyModels';
+import { Customer } from '../../models/Customer';
+import { CREATE_CUSTOMER, DELETE_CUSTOMER, SET_CUSTOMER, SET_CUSTOMERS, UPDATE_CUSTOMER } from './constants';
 
-import {
-  CREATE_CUSTOMER_REQUEST,
-  DELETE_CUSTOMER_REQUEST,
-  SET_CUSTOMER_REQUEST,
-  SET_CUSTOMERS,
-  UPDATE_CUSTOMER_REQUEST,
-} from './constants';
+const initialState: Array<Customer> = [];
 
-const initialState: Customer[] = [];
-
-export const customersReducer = (state: Customer[] = initialState, action: { type: string; data: any }): Customer[] => {
+export const customersReducer = (state: Array<Customer> = initialState, action: { type: string; data: any }): Array<Customer> => {
   switch (action.type) {
-    case CREATE_CUSTOMER_REQUEST:
+    case CREATE_CUSTOMER:
       return state.concat([action.data]);
-    case DELETE_CUSTOMER_REQUEST:
+    case DELETE_CUSTOMER:
       return state.filter((customer) => customer.id !== action.data.id);
-    case UPDATE_CUSTOMER_REQUEST:
+    case UPDATE_CUSTOMER:
       return state.map((customer) => (customer.id === action.data.id ? { ...customer, editing: !customer.editing } : customer));
-    case SET_CUSTOMER_REQUEST:
+    case SET_CUSTOMER:
       return state.map((customer) => {
         if (customer.id === action.data.id) {
           return {

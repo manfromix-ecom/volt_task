@@ -12,7 +12,7 @@ export const AddInvoiceItem = (props: AddInvoiceItemProps) => {
   const newProduct = createRef<any>();
 
   const onClick = () => {
-    const productId = newProduct.current.value;
+    const productId = newProduct.current && newProduct.current.value ? Number(newProduct.current.value) : 0;
     const quantity = 0;
     setInvoiceItem({ invoiceId, productId, quantity });
   };

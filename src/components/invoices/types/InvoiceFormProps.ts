@@ -1,4 +1,4 @@
-import { Invoice } from 'MyModels';
+import { Invoice } from '../../../models/Invoice';
 
 export interface InvoiceFormStateProps {}
 
